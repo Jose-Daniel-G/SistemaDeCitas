@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,8 +23,12 @@ class UsuarioController extends Controller
     {
         // $datos = $request->all();
         // return response()->json($datos);
-        
-        $request->validate(['name'=>'required|max:250', 'email'=>'required|max:250|unique:users', 'password'=>'required|max:250|confirmed']);
+        $request->validate([
+            'name' => 'required|max:250',
+            'email' => 'required|email|max:250|unique:users',
+            'password' => 'required|min:8|max:250|confirmed',
+        ]);
+                
         $usuario = new User();
         $usuario->name = $request->name;
         $usuario->email = $request->email;
@@ -36,22 +39,34 @@ class UsuarioController extends Controller
             ->with('icono','success');
     }
 
-    public function show(Usuario $usuario)
-    {
-        //
+    public function show(User $usuario)
+    { //$usuario = User::finOrFail();
+        return view('admin.usuarios.show', compact('usuario'));
     }
 
-    public function edit(Usuario $usuario)
+    public function edit(User $usuario)
     {
-        //
+        return view('admin.usuarios.edit', compact('usuario'));
     }
 
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, User $usuario)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|confirmed',
+        ]);
+    
+        $usuario->name = $request->input('name');
+        $usuario->email = $request->input('email');
+        $usuario->password = bcrypt($request->input('password'));
+        $usuario->save();
+    
+        return redirect()->route('admin.usuarios.index')->with('success', 'Usuario actualizado exitosamente');
     }
+    
 
-    public function destroy(Usuario $usuario)
+    public function destroy(User $usuario)
     {
         //
     }

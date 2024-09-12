@@ -24,42 +24,42 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Nombre del usuario </label><b>*</b>
-                                        <input type="text" class="form-control" name="name" required>
+                                        <input type="text" class="form-control" name="name" value="{{ old('name')}}" required>
                                         @error('nombre')
-                                            <small class="bg-danger text-white p-1">{{ session('info') }}</small>
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="email">Email</label><b>*</b>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <input type="email" class="form-control" name="email"  value="{{ old('email')}}" required>
                                     </div>
                                     @error('email')
-                                        <small class="bg-danger text-white p-1">{{ session('info') }}</small>
+                                        <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="password">Contrasena</label><b>*</b>
-                                        <input type="password" class="form-control" name="password" required>
+                                        <input type="password" class="form-control" name="password"  value="{{ old('password')}}" required>
                                     </div>
                                     @error('password')
-                                        <small class="bg-danger text-white p-1">{{ session('info') }}</small>
+                                        <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="password_confirmation">Verificacion de contrasena</label><b>*</b>
-                                        <input type="password" class="form-control" name="password_confirmation" required>
+                                        <input type="password" class="form-control" name="password_confirmation"  value="{{ old('password_confirmation')}}" required>
                                     </div>
                                     @error('password_confirmation')
-                                        <small class="bg-danger text-white p-1">{{ session('info') }}</small>
+                                        <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <a href="{{ route('admin.usuarios.create') }}" class="btn btn-secondary">
+                                        <a href="{{ route('admin.usuarios.index') }}" class="btn btn-secondary">
                                             Cancelar
                                             {{-- <i class="fa-solid fa-plus"></i> --}}
                                         </a>
