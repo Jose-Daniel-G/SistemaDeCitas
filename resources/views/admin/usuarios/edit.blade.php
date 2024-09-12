@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="name">Nombre del usuario </label><b>*</b>
+                                        <label for="name">Nombre del usuario </label>
                                         <input type="text" class="form-control" name="name"
                                             value="{{ $usuario->name }}" required>
                                         @error('nombre')
@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="email">Email</label><b>*</b>
+                                        <label for="email">Email</label>
                                         <input type="email" class="form-control" name="email"
                                             value="{{ $usuario->email }}" required>
                                     </div>
@@ -42,8 +42,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="password">Contrasena</label><b>*</b>
-                                        <input type="password" class="form-control" name="password" required>
+                                        <label for="password">Contrasena</label>
+                                        <input type="password" class="form-control" name="password">
                                     </div>
                                     @error('password')
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
@@ -51,8 +51,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="password_confirmation">Verificacion de contrasena</label><b>*</b>
-                                        <input type="password" class="form-control" name="password_confirmation" required>
+                                        <label for="password_confirmation">Verificacion de contrasena</label>
+                                        <input type="password" class="form-control" name="password_confirmation">
                                     </div>
                                     @error('password_confirmation')
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
@@ -64,7 +64,7 @@
                                             Cancelar
                                             {{-- <i class="fa-solid fa-plus"></i> --}}
                                         </a>
-                                        <button type="submit" class="btn btn-primary">Registrar usuario</button>
+                                        <button type="submit" class="btn btn-success">Editar usuario</button>
 
                                     </div>
                                 </div>

@@ -51,23 +51,29 @@ class UsuarioController extends Controller
 
     public function update(Request $request, User $usuario)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'required|confirmed',
+            'password' => 'nullable|max:255|confirmed',
         ]);
     
-        $usuario->name = $request->input('name');
-        $usuario->email = $request->input('email');
-        $usuario->password = bcrypt($request->input('password'));
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request['password']); //bcrypt($request->input('password'));
+        }
         $usuario->save();
     
-        return redirect()->route('admin.usuarios.index')->with('success', 'Usuario actualizado exitosamente');
+        return redirect()->route('admin.usuarios.index')->with('info', 'Usuario actualizado exitosamente')
+                                                        ->with('icono','success');
     }
     
 
     public function destroy(User $usuario)
     {
-        //
+        $usuario->delete();
+
+        return redirect()->route('admin.usuarios.index')->with('info','La usuario se eliminó con éxito')->with('icono','success');
     }
 }

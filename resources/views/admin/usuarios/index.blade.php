@@ -52,9 +52,17 @@
                                     <td scope="row">{{ $usuario->created_at->diffForHumans() }}</td>
                                     <td scope="row">
                                         <div class="btn-group" role="group" aria-label="basic example">
-                                            <a href="{{ route('admin.usuarios.show', $usuario->id) }}" class="btn btn-info btn-sm">Ver</a>
-                                            <a href="{{ route('admin.usuarios.edit', $usuario->id)}}" class="btn btn-success btn-sm">Editar</a>
-                                            <button type="button" class="btn btn-danger btn-sm">Borrar</button>
+                                            <a href="{{ route('admin.usuarios.show', $usuario->id) }}"
+                                                class="btn btn-info btn-sm">Ver</a>
+                                            <a href="{{ route('admin.usuarios.edit', $usuario->id) }}"
+                                                class="btn btn-success btn-sm">Editar</a>
+                                            <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}" method="POST"
+                                                onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+
                                         </div>
                                     </td>
                                 </tr>
