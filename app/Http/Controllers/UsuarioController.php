@@ -34,7 +34,7 @@ class UsuarioController extends Controller
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->password);
         $usuario->save();
-        return redirect()->route('admin.usuarios.create')
+        return redirect()->route('admin.usuarios.index')
             ->with('info','Se registro al usuario de forma correcta')
             ->with('icono','success');
     }
@@ -73,7 +73,6 @@ class UsuarioController extends Controller
     public function destroy(User $usuario)
     {
         $usuario->delete();
-
         return redirect()->route('admin.usuarios.index')->with('info','La usuario se eliminó con éxito')->with('icono','success');
     }
 }

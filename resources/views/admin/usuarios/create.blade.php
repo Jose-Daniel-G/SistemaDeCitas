@@ -18,14 +18,14 @@
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Datos</h3>
-                        <form action="" method="POST" autocomplete="off">
+                        <form action="{{ route('usuarios.store') }}" method="POST" autocomplete="off">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Nombre del usuario </label><b>*</b>
                                         <input type="text" class="form-control" name="name" value="{{ old('name')}}" required>
-                                        @error('nombre')
+                                        @error('name')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
                                     </div>

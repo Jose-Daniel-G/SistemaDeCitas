@@ -16,6 +16,8 @@
                 <div class="card card-outline card-success">
                     <div class="card-header">
                         <h3 class="card-title">Datos a llenar</h3>
+                    </div>
+                    <div class="card-body">
                         <form action="{{ route('admin.usuarios.update', $usuario->id) }}" method="POST">
                             @csrf
                             @method('PUT')
@@ -72,9 +74,10 @@
                         </form>
                     </div>
                 </div>
-
             </div>
+
         </div>
+    </div>
     </div>
     </div>
 @stop

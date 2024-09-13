@@ -319,22 +319,54 @@ return [
                 [
                     'text' => 'Creacion de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
-                    'route' => 'admin.usuarios.create',
+                    'route' => 'usuarios.create',
                 ],
                 [
                     'text' => 'Listado de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
-                    'route' => 'admin.usuarios.index',
+                    'route' => 'usuarios.index',
                 ],
 
             ],
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'text' => 'Secretarias',
+            // 'url' => 'admin/pages',
+            'icon' => 'fa-solid fa-layer-group',
+            'route' => 'admin.secretarias.index',
+            // 'label' => 4,
+            // 'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Creacion de secretarias',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.secretarias.create',
+                ],
+                [
+                    'text' => 'Listado de secretarias',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.secretarias.index',
+                ],
+
+            ],
+        ],
+        [
+            'text' => 'Pacientes',
+            'icon' => 'fas fa-fw fa-user',
+            'route' => 'admin.secretarias.index',
+            'submenu' => [
+                [
+                    'text' => 'Creacion de pacientes',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.pacientes.create',
+                ],
+                [
+                    'text' => 'Listado de pacientes',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.pacientes.index',
+                ],
+
+            ],
         ],
         ['header' => 'account_settings'],
         [
