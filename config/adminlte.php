@@ -368,6 +368,24 @@ return [
 
             ],
         ],
+        [
+            'text' => 'Consultorios',
+            'icon' => 'fas fa-fw fa-lock',
+            'route' => 'admin.secretarias.index',
+            'submenu' => [
+                [
+                    'text' => 'Creacion de consultorios',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.consultorios.create',
+                ],
+                [
+                    'text' => 'Listado de consultorios',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.consultorios.index',
+                ],
+
+            ],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

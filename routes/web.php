@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,10 @@ Route::resource('/admin/usuarios', UsuarioController::class)->middleware('auth')
 
 //RUTAS SECRETARIAS ADMIN
 Route::resource('/admin/secretarias', SecretariaController::class)->names('admin.secretarias')->middleware('auth');
-Route::resource('/admin/pacientes', SecretariaController::class)->names('admin.pacientes')->middleware('auth');
+//RUTAS PACIENTES ADMIN
+Route::resource('/admin/pacientes', PacienteController::class)->names('admin.pacientes')->middleware('auth');
+//RUTAS CONSULTORIOS ADMIN
+Route::resource('/admin/consultorios', PacienteController::class)->names('admin.consultorios')->middleware('auth');
 
 
 

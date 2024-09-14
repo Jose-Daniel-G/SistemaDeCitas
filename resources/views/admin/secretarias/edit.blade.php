@@ -64,7 +64,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row ">
                                 <div class="col-md-4">
@@ -99,7 +98,6 @@
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="password">Contrasena</label>
@@ -120,7 +118,7 @@
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                                                <div class="col-md-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <a href="{{ route('admin.usuarios.index') }}" class="btn btn-secondary">
                                             Cancelar

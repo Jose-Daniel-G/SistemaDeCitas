@@ -18,7 +18,7 @@
                         <h3 class="card-title">Datos a llenar</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.usuarios.update', $usuario->id) }}" method="POST">
+                        <form action="{{ route('usuarios.update', $usuario->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
