@@ -333,7 +333,6 @@ return [
             'text' => 'Secretarias',
             // 'url' => 'admin/pages',
             'icon' => 'fa-solid fa-layer-group',
-            'route' => 'admin.secretarias.index',
             // 'label' => 4,
             // 'label_color' => 'success',
             'submenu' => [
@@ -353,7 +352,6 @@ return [
         [
             'text' => 'Pacientes',
             'icon' => 'fas fa-fw fa-user',
-            'route' => 'admin.secretarias.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de pacientes',
@@ -371,7 +369,6 @@ return [
         [
             'text' => 'Consultorios',
             'icon' => 'fas fa-fw fa-lock',
-            'route' => 'admin.secretarias.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de consultorios',
@@ -382,6 +379,23 @@ return [
                     'text' => 'Listado de consultorios',
                     'icon'        => 'far fa-circle nav-icon',
                     'route' => 'admin.consultorios.index',
+                ],
+
+            ],
+        ],
+        [
+            'text' => 'Doctores',
+            'icon' => 'fas fa-fw fa-lock',
+            'submenu' => [
+                [
+                    'text' => 'Creacion de doctores',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.doctores.create',
+                ],
+                [
+                    'text' => 'Listado de doctores',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.doctores.index',
                 ],
 
             ],

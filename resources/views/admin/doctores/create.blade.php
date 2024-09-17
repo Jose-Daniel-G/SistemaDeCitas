@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <h1>Registro de un nuevo consultorio</h1>
+        <h1>Registro de un nuevo doctores</h1>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -18,35 +18,25 @@
                     <h3 class="card-title">Llene los Datos</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.consultorios.store') }}" method="POST" autocomplete="off">
+                    <form action="{{ route('admin.doctores.store') }}" method="POST" autocomplete="off">
                         @csrf
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre del consultorio </label><b>*</b>
-                                    <input type="text" class="form-control" name="nombre"
-                                        value="{{ old('nombre') }}" required>
-                                    @error('nombre')
+                                    <label for="nombres">Nombre del doctores </label><b>*</b>
+                                    <input type="text" class="form-control" name="nombres"
+                                        value="{{ old('nombres') }}" required>
+                                    @error('nombres')
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="ubicacion">Ubicacion </label><b>*</b>
-                                    <input type="text" class="form-control" name="ubicacion"
-                                        value="{{ old('ubicacion') }}" required>
-                                    @error('ubicacion')
-                                        <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="capacidad">Capacidad </label><b>*</b>
-                                    <input type="text" class="form-control" name="capacidad"
-                                        value="{{ old('capacidad') }}" required>
-                                    @error('capacidad')
+                                    <label for="apellidos">Apellidos </label><b>*</b>
+                                    <input type="text" class="form-control" name="apellidos"
+                                        value="{{ old('apellidos') }}" required>
+                                    @error('apellidos')
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -54,9 +44,19 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="telefono">Telefono </label><b>*</b>
-                                    <input type="text" class="form-control" name="telefono"
+                                    <input type="number" class="form-control" name="telefono"
                                         value="{{ old('telefono') }}" required>
                                     @error('telefono')
+                                        <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="licencia_medica">Licencia Medica </label><b>*</b>
+                                    <input type="text" class="form-control" name="licencia_medica"
+                                        value="{{ old('licencia_medica') }}" required>
+                                    @error('licencia_medica')
                                         <small class="bg-danger text-white p-1">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -101,7 +101,7 @@
                     Cancelar
                     {{-- <i class="fa-solid fa-plus"></i> --}}
                 </a>
-                <button type="submit" class="btn btn-primary">Registrar consultorio</button>
+                <button type="submit" class="btn btn-primary">Registrar doctores</button>
             </div>
         </div>
     </div>

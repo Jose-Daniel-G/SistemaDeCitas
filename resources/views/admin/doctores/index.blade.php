@@ -4,7 +4,7 @@
 @section('css')
 @stop
 @section('content_header')
-    <h1>Listado de consultorios</h1>
+    <h1>Listado de doctores</h1>
 @stop
 
 @section('content')
@@ -12,9 +12,9 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Consultorios registrados</h3>
+                    <h3 class="card-title">Doctores registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ route('admin.consultorios.create') }}" class="btn btn-primary">Registrar
+                        <a href="{{ route('admin.doctores.create') }}" class="btn btn-primary">Registrar
                             {{-- <i class="fa-solid fa-plus"></i> --}}
                         </a>
                     </div>
@@ -24,38 +24,34 @@
                     @if ($info = Session::get('info'))
                         <div class="alert alert-success"><strong>{{ $info }}</strong></div>
                     @endif
-                    <table id="consultorios" class="table table-striped table-bordered table-hover table-sm">
+                    <table id="doctores" class="table table-striped table-bordered table-hover table-sm">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Nro</th>
-                                <th>Consultorio</th>
-                                <th>Ubicacion</th>
-                                <th>Capacidad</th>
+                                <th>Nombres y Apellidos</th>
                                 <th>Telefono</th>
+                                <th>Licencia Medica</th>
                                 <th>Especialidad</th>
-                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $contador = 1; ?>
-                            @foreach ($consultorios as $cosultorio)
+                            @foreach ($doctores as $doctor)
                                 <tr>
                                     <td scope="row">{{ $contador++ }}</td>
-                                    <td scope="row">{{ $cosultorio->nombre }}</td>
-                                    <td scope="row">{{ $cosultorio->ubicacion }}</td>
-                                    <td scope="row">{{ $cosultorio->capcacidad }}</td>
-                                    <td scope="row">{{ $cosultorio->telefono }}</td>
-                                    <td scope="row">{{ $cosultorio->especialidad }}</td>
-                                    <td scope="row">{{ $cosultorio->estado }}</td>
+                                    <td scope="row">{{ $doctor->nombres." ". $doctor->apellidos }}</td>
+                                    <td scope="row">{{ $doctor->telefono }}</td>
+                                    <td scope="row">{{ $doctor->licencia_medica }}</td>
+                                    <td scope="row">{{ $doctor->especialidad }}</td>
                                     <td scope="row">
                                         <div class="btn-group" role="group" aria-label="basic example">
-                                            <a href="{{ route('admin.consultorios.show', $cosultorio->id) }}"
+                                            <a href="{{ route('admin.doctores.show', $doctor->id) }}"
                                                 class="btn btn-info btn-sm">Ver</a>
-                                            <a href="{{ route('admin.consultorios.edit', $cosultorio->id) }}"
+                                            <a href="{{ route('admin.doctores.edit', $doctor->id) }}"
                                                 class="btn btn-success btn-sm">Editar</a>
-                                            <form action="{{ route('admin.consultorios.destroy', $cosultorio->id) }}" method="POST"
-                                                onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cosultorio?');">
+                                            <form action="{{ route('admin.doctores.destroy', $doctor->id) }}" method="POST"
+                                                onsubmit="return confirm('¿Estás seguro de que deseas eliminar este doctor?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -86,7 +82,7 @@
     <script src="https://cdn.datatables.net/buttons/2.3.0/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.0/js/buttons.colVis.min.js"></script>
     <script>
-        new DataTable('#consultorios', {
+        new DataTable('#doctores', {
             responsive: true,
             autoWidth: false, //no le vi la funcionalidad
             dom: 'Bfrtip', // Añade el contenedor de botones
@@ -96,12 +92,12 @@
             "language": {
                 "decimal": "",
                 "emptyTable": "No hay datos disponibles en la tabla",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ consultorios",
-                "infoEmpty": "Mostrando 0 a 0 de 0 consultorios",
-                "infoFiltered": "(filtrado de _MAX_ consultorios totales)",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ doctores",
+                "infoEmpty": "Mostrando 0 a 0 de 0 doctores",
+                "infoFiltered": "(filtrado de _MAX_ doctores totales)",
                 "infoPostFix": "",
                 "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ consultorios",
+                "lengthMenu": "Mostrar _MENU_ doctores",
                 "loadingRecords": "Cargando...",
                 "processing": "",
                 "search": "Buscar:",

@@ -9,7 +9,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <h1>Consultorio: {{ $consultorio->nombre }} {{ $consultorio->ubicacion }}</h1>
+            <h1>Consultorio: {{ $doctor->nombre }} {{ $doctor->ubicacion }}</h1>
 
         </div>
         <div class="row">
@@ -19,7 +19,7 @@
                         <h3 class="card-title">Datos registrados</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.consultorios.update', $consultorio->id) }}" method="POST"
+                        <form action="{{ route('admin.doctores.update', $doctor->id) }}" method="POST"
                             autocomplete="off">
                             @csrf
                             @method('PUT')
@@ -27,9 +27,9 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="nombre">Nombre del consultorio </label><b>*</b>
+                                        <label for="nombre">Nombre del doctor </label><b>*</b>
                                         <p>
-                                            {{ $consultorio->nombre }}
+                                            {{ $doctor->nombre }}
                                         </p>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                     <div class="form-group">
                                         <label for="ubicacion">Ubicacion </label><b>*</b>
                                         <p>
-                                            {{ $consultorio->ubicacion }}
+                                            {{ $doctor->ubicacion }}
                                         </p>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label for="capacidad">Capacidad </label><b>*</b>
                                         <p>
-                                            {{ $consultorio->capacidad }}
+                                            {{ $doctor->capacidad }}
                                         </p>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group">
                                         <label for="telefono">Telefono </label><b>*</b>
                                         <p>
-                                            {{ $consultorio->telefono }}
+                                            {{ $doctor->telefono }}
                                         </p>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label for="especialidad">Especialidad </label><b>*</b>
                                         <p>
-                                            {{ $consultorio->especialidad }}
+                                            {{ $doctor->especialidad }}
                                         </p>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                     <div class="form-group">
                                         <label for="estado">Estado </label><b>*</b>
                                             <!-- Opción por defecto -->
-                                            <p>{{ $consultorio->estado == 'A' ? 'Activo' : 'Inactivo' }}</p>
+                                            <p>{{ $doctor->estado == 'A' ? 'Activo' : 'Inactivo' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <a href="{{ route('admin.consultorios.index') }}" class="btn btn-secondary">
+                                        <a href="{{ route('admin.doctores.index') }}" class="btn btn-secondary">
                                             Regresar
                                         </a>
                                     </div>

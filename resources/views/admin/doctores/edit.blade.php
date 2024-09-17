@@ -9,7 +9,7 @@
     @section('content')
 
         <div class="row">
-            <h1>Actualizacion consultorio: {{ $consultorio->nombre }} {{ $consultorio->ubicacion }}</h1>
+            <h1>Actualizacion doctor: {{ $doctor->nombre }} {{ $doctor->ubicacion }}</h1>
 
         </div>
         <div class="row">
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('admin.consultorios.update', $consultorio->id) }}" method="POST"
+                        <form action="{{ route('admin.doctores.update', $doctor->id) }}" method="POST"
                             autocomplete="off">
                             @csrf
                             @method('PUT')
@@ -28,9 +28,9 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="nombre">Nombre del consultorio </label><b>*</b>
+                                        <label for="nombre">Nombre del doctor </label><b>*</b>
                                         <input type="text" class="form-control" name="nombre"
-                                            value="{{ $consultorio->nombre }}" required>
+                                            value="{{ $doctor->nombre }}" required>
                                         @error('nombre')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
@@ -40,7 +40,7 @@
                                     <div class="form-group">
                                         <label for="ubicacion">Ubicacion </label><b>*</b>
                                         <input type="text" class="form-control" name="ubicacion"
-                                            value="{{ $consultorio->ubicacion }}" required>
+                                            value="{{ $doctor->ubicacion }}" required>
                                         @error('ubicacion')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label for="capacidad">Capacidad </label><b>*</b>
                                         <input type="text" class="form-control" name="capacidad"
-                                            value="{{ $consultorio->capacidad }}" required>
+                                            value="{{ $doctor->capacidad }}" required>
                                         @error('capacidad')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
@@ -60,7 +60,7 @@
                                     <div class="form-group">
                                         <label for="telefono">Telefono </label><b>*</b>
                                         <input type="text" class="form-control" name="telefono"
-                                            value="{{ $consultorio->telefono }}" required>
+                                            value="{{ $doctor->telefono }}" required>
                                         @error('telefono')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
@@ -72,7 +72,7 @@
                                     <div class="form-group">
                                         <label for="especialidad">Especialidad </label><b>*</b>
                                         <input type="text" class="form-control" name="especialidad"
-                                            value="{{ $consultorio->especialidad }}" required>
+                                            value="{{ $doctor->especialidad }}" required>
                                         @error('especialidad')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
@@ -84,7 +84,7 @@
                                         <label for="estado">Estado </label><b>*</b>
                                         <select name="estado" id="" class="form-control" name="estado">
                                             <!-- Opción por defecto -->
-                                            @if ($consultorio->estado == 'A')
+                                            @if ($doctor->estado == 'A')
                                                 <option value="A">Activo</option>
                                                 <option value="I">Inactivo</option>
                                             @else
@@ -102,11 +102,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <a href="{{ route('admin.consultorios.index') }}" class="btn btn-secondary">
+                                        <a href="{{ route('admin.doctores.index') }}" class="btn btn-secondary">
                                             Regresar
                                             {{-- <i class="fa-solid fa-plus"></i> --}}
                                         </a>
-                                        <button type="submit" class="btn btn-primary">Registrar consultorio</button>
+                                        <button type="submit" class="btn btn-primary">Registrar doctor</button>
                                     </div>
                                 </div>
                             </div>

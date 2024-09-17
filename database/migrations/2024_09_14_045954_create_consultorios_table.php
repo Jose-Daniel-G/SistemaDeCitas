@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('ubicacion');
-            $table->string('capcacidad');
+            $table->string('capacidad');
             $table->string('telefono')->nullable();
             $table->string('especialidad');
             $table->string('estado');
