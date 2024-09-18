@@ -37,6 +37,10 @@ Route::resource('/admin/doctores', DoctorController::class)->names('admin.doctor
 ])->middleware('auth');
 Route::resource('/admin/horarios', HorarioController::class)->names('admin.horarios')->middleware('auth');
 
+//AJAX
+Route::get('/admin/horarios/consultorio/{id}',[ HorarioController::class, 'cargar_datos_consultorios'])
+        ->name('admin.horarios.cargar_datos_consultorios')->middleware('auth');
+
 
 
 Auth::routes();

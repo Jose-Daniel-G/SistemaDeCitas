@@ -79,56 +79,24 @@
             <div class="card card-outline card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Calendario de atencion de Doctores</h3>
+
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover table-sm">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Hora</th>
-                                    <th scope="col">Lunes</th>
-                                    <th scope="col">Martes</th>
-                                    <th scope="col">Miercoles</th>
-                                    <th scope="col">Jueves</th>
-                                    <th scope="col">Viernes</th>
-                                    <th scope="col">Sabado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @php
-    $horas = [
-        '08:00:00 - 09:00:00', '09:00:00 - 10:00:00', '10:00:00 - 11:00:00', 
-        '11:00:00 - 12:00:00', '12:00:00 - 13:00:00', '13:00:00 - 14:00:00', 
-        '15:00:00 - 16:00:00', '17:00:00 - 18:00:00', '19:00:00 - 20:00:00'
-    ];
-    $diasSemana = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
-@endphp
-
-@foreach ($horas as $hora)
-    @php
-        list($hora_inicio, $hora_fin) = explode(' - ', $hora);
-    @endphp
-    <tr>
-        <td scope="row">{{ $hora }}</td>
-        @foreach ($diasSemana as $dia)
-            @php
-                $nombre_doctor = '';
-                foreach ($horarios as $horario) {
-                    if (strtoupper($horario->dia) == $dia && $hora_inicio >= $horario->hora_inicio && $hora_fin <= $horario->hora_fin) {
-                        $nombre_doctor = $horario->doctor->nombres." ".$horario->doctor->apellidos; // Acceder al atributo nombres
-                        break;
-                    }
-                }
-            @endphp
-            <td>{{ $nombre_doctor }}</td>
-        @endforeach
-    </tr>
-@endforeach
-
-                            </tbody>
-                        </table>
+                    <div class="form-group">
+                        <label for="consultorio_id">Consultorios </label><b>*</b>
+                        <select name="consultorio_id" id="consultorio_select" class="form-control">
+                            <option value="" selected disabled>Seleccione una opción</option>
+                            @foreach ($consultorios as $consultorio)
+                                <option value="{{ $consultorio->id }}">
+                                    {{ $consultorio->nombres . ' - ' . $consultorio->ubicacion }} </option>
+                            @endforeach
+                        </select>
+                        @error('consultorio_id')
+                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                        @enderror
                     </div>
-
+                    <hr>
+                    <div id="consultorio_info"></div>
                 </div>
             </div>
         </div>
@@ -136,6 +104,29 @@
 @stop
 
 @section('js')
+    <script>// carga contenido de tabla en  consultorio_info
+        $('#consultorio_select').on('change', function() {
+            var consultorio_id = $('#consultorio_select').val();
+            var url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
+            url = url.replace(':id', consultorio_id);
+
+            if (consultorio_id) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#consultorio_info').html(data);
+                    },
+                    error: function() {
+                        alert('Error al obtener datos del consultorio');
+                    }
+                });
+            } else {
+                $('#consultorio_info').html('');
+            }
+        });
+    </script>
+
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap4.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
@@ -152,9 +143,7 @@
             responsive: true,
             autoWidth: false, //no le vi la funcionalidad
             dom: 'Bfrtip', // Añade el contenedor de botones
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print', 'colvis' // Botones que aparecen en la imagen
-            ],
+           // buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'  ], // Botones que aparecen en la imagen
             "language": {
                 "decimal": "",
                 "emptyTable": "No hay datos disponibles en la tabla",
