@@ -21,29 +21,52 @@ class HorarioController extends Controller
     {
         $doctores = Doctor::all();
         $consultorios = Consultorio::all();
-        return view('admin.horarios.create', compact('doctores','consultorios'));
+        $horarios = Horario::with('doctor', 'consultorio')->get(); // viene con la relacion del horario
+
+        return view('admin.horarios.create', compact('doctores','consultorios','horarios'));
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        // Validar los datos de entrada
         $validatedData = $request->validate([
             'dia' => 'required',
-            'hora_inicio' => 'required',
-            'hora_fin' => 'required',
+            'hora_inicio' => 'required|date_format:H:i',
+            'hora_fin' => 'required|date_format:H:i|after:hora_inicio',
         ]);
-
+    
+        // Verificar si el horario ya existe para ese día y rango de horas
+        $horarioExistente = Horario::where('dia', $request->dia)
+            ->where(function ($query) use ($request) {
+                $query->where(function ($query) use ($request) {
+                    // Condición 1: La hora de inicio del horario nuevo no debe estar dentro de un horario existente
+                    $query->where('hora_inicio', '<', $request->hora_fin)
+                          ->where('hora_fin', '>', $request->hora_inicio);
+                });
+            })
+            ->exists();
+    
+        // Si ya existe un horario en ese rango, regresar con un mensaje de error
+        if ($horarioExistente) {
+            return redirect()->back()
+                ->withInput()
+                ->with('mensaje', 'Ya existe un horario que se superpone con el horario ingresado')
+                ->with('icono', 'error');
+        }
+    
+        // Crear el nuevo horario
         Horario::create($request->all());
     
-
+        // Redirigir a la lista de horarios con un mensaje de éxito
         return redirect()->route('admin.horarios.index')
-            ->with('info', 'Se registro el horario de forma correcta')
+            ->with('info', 'Se registró el horario de forma correcta')
             ->with('icono', 'success');
     }
+    
 
     public function show(Horario $horario)
     {
-        // $horario =$horario->with('doctor', 'consultorio')->get();
+        $horario =$horario->with('doctor', 'consultorio')->get();
         return view('admin.horarios.show', compact('horario'));
     }
 

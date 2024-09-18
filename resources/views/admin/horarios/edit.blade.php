@@ -20,97 +20,93 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('admin.consultorios.update', $consultorio->id) }}" method="POST"
-                            autocomplete="off">
+                        <form action="{{ route('admin.horarios.update') }}" method="POST" autocomplete="off">
                             @csrf
-                            @method('PUT')
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre del consultorio </label><b>*</b>
-                                        <input type="text" class="form-control" name="nombre"
-                                            value="{{ $consultorio->nombre }}" required>
-                                        @error('nombre')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="ubicacion">Ubicacion </label><b>*</b>
-                                        <input type="text" class="form-control" name="ubicacion"
-                                            value="{{ $consultorio->ubicacion }}" required>
-                                        @error('ubicacion')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="capacidad">Capacidad </label><b>*</b>
-                                        <input type="text" class="form-control" name="capacidad"
-                                            value="{{ $consultorio->capacidad }}" required>
-                                        @error('capacidad')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="telefono">Telefono </label><b>*</b>
-                                        <input type="text" class="form-control" name="telefono"
-                                            value="{{ $consultorio->telefono }}" required>
-                                        @error('telefono')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
+                            @method('PUT');
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="especialidad">Especialidad </label><b>*</b>
-                                        <input type="text" class="form-control" name="especialidad"
-                                            value="{{ $consultorio->especialidad }}" required>
-                                        @error('especialidad')
+                                        <label for="doctor_id">Doctores </label><b>*</b>
+                                        <select class="form-control" name="doctor_id" id="doctor_id">
+                                            <option value="" selected disabled>Seleccione una opción</option>
+                                            @foreach ($doctores as $doctor)
+                                                <option value="{{ $doctor->id }}">
+                                                    {{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('doctor_id')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="estado">Estado </label><b>*</b>
-                                        <select name="estado" id="" class="form-control" name="estado">
-                                            <!-- Opción por defecto -->
-                                            @if ($consultorio->estado == 'A')
-                                                <option value="A">Activo</option>
-                                                <option value="I">Inactivo</option>
-                                            @else
-                                                <option value="I">Inactivo</option>
-                                                <option value="A">Activo</option>
-                                            @endif
-
+                                        <label for="consultorio_id">Consultorios </label><b>*</b>
+                                        <select class="form-control" name="consultorio_id" id="consultorio_id">
+                                            <option value="" selected disabled>Seleccione una opción</option>
+                                            @foreach ($consultorios as $consultorio)
+                                                <option value="{{ $consultorio->id }}">
+                                                    {{ $consultorio->nombres . ' Ubicacion: ' . $consultorio->ubicacion }}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        @error('consultorio_id')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
-
                             </div>
-
-
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="dia">Dia </label><b>*</b>
+                                        <select class="form-control" name="dia" id="dia">
+                                            <option value="" selected disabled>Seleccione una opción</option>
+                                            <option value="LUNES">LUNES</option>
+                                            <option value="MARTES">MARTES</option>
+                                            <option value="MIERCOLES">MIERCOLES</option>
+                                            <option value="JUEVES">JUEVES</option>
+                                            <option value="VIERNES">VIERNES</option>
+                                            <option value="SABADO">SABADO</option>
+                                            {{-- <option value="DOMINGO">DOMINGO</option> --}}
+                                        </select>
+                                        @error('dia')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="hora_inicio">Hora Inicio </label><b>*</b>
+                                        <input type="time" class="form-control" name="hora_inicio" id="hora_inicio"
+                                            value="{{ old('hora_inicio') }}" required>
+                                        @error('hora_inicio')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="hora_fin">Hora Final </label><b>*</b>
+                                        <input type="time" class="form-control" name="hora_fin" id="hora_fin"
+                                            value="{{ old('hora_fin') }}" required>
+                                        @error('hora_fin')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <a href="{{ route('admin.consultorios.index') }}" class="btn btn-secondary">
-                                            Regresar
-                                            {{-- <i class="fa-solid fa-plus"></i> --}}
-                                        </a>
-                                        <button type="submit" class="btn btn-primary">Registrar consultorio</button>
+                                        <a href="{{ route('admin.horarios.index') }}"
+                                            class="btn btn-secondary">Regresar</a>
+                                        <button type="submit" class="btn btn-primary">Registrar horario</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
 
                     </div>
                 </div>
