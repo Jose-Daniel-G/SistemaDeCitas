@@ -90,19 +90,15 @@
                                 <button type="submit" class="btn btn-primary">Registrar horario</button>
                             </div>
                         </form>
-                    </div>            <div class="col-md-9">
-                <hr>
-                <div id="consultorio_info"></div>
-            </div>
+                    </div>
+                    <div class="col-md-9">
+                        <hr>
+                        <div id="consultorio_info"></div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
-
 @stop
 
 @section('css')
