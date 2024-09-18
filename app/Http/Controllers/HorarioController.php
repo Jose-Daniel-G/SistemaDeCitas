@@ -2,64 +2,84 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consultorio;
+use App\Models\Doctor;
 use App\Models\Horario;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class HorarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $horarios = Horario::with('doctor', 'consultorio')->get(); // viene con la relacion del horario
+        return view('admin.horarios.index', compact('horarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $doctores = Doctor::all();
+        $consultorios = Consultorio::all();
+        return view('admin.horarios.create', compact('doctores','consultorios'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'dia' => 'required',
+            'hora_inicio' => 'required',
+            'hora_fin' => 'required',
+        ]);
+
+        Horario::create($request->all());
+    
+
+        return redirect()->route('admin.horarios.index')
+            ->with('info', 'Se registro el horario de forma correcta')
+            ->with('icono', 'success');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Horario $horario)
     {
-        //
+        // $horario =$horario->with('doctor', 'consultorio')->get();
+        return view('admin.horarios.show', compact('horario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Horario $horario)
     {
-        //
+        return view('admin.horarios.edit', compact('horario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Horario $horario)
     {
-        //
-    }
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'dia' => 'required',
+            'hora_inicio' => 'required',
+            'hora_fin' => 'required',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
+        // Crea el nuevo horario
+        $horario->update($request->all());
+    
+    
+        return redirect()->route('admin.horarios.index')
+            ->with('info', 'Horario actualizado correctamente.')
+            ->with('icono', 'success');
+    }
+    
+
     public function destroy(Horario $horario)
     {
-        //
+
+        // Eliminar el horario
+        $horario->delete();
+    
+        return redirect()->route('admin.horarios.index')
+            ->with('info', 'El horario se eliminó con éxito')
+            ->with('icono', 'success');
     }
+    
 }

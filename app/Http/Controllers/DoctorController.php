@@ -16,7 +16,7 @@ class DoctorController extends Controller
     }
 
     public function create()
-    {
+    { 
         return view('admin.doctores.create');
     }
 
@@ -24,14 +24,27 @@ class DoctorController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'nombre' => 'required',
-            'ubicacion' => 'required',
-            'capacidad' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'telefono' => 'required',
+            'licencia_medica' => 'required',
             'especialidad' => 'required',
-            'estado' => 'required',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|max:255|confirmed',
         ]);
+        $usuario = new User();
+        $usuario->name = $request->nombres;
+        $usuario->email = $request->email;
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
         // Crear un nuevo doctor
-        Doctor::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+    
+        // Crea el nuevo doctor
+        Doctor::create($data);
+    
 
         return redirect()->route('admin.doctores.index')
             ->with('info', 'Se registro el doctor de forma correcta')
@@ -51,17 +64,28 @@ class DoctorController extends Controller
     public function update(Request $request, Doctor $doctor)
     {
         // dd($request->all());
-        // Validación de los datos
         $validatedData = $request->validate([
-            'nombre' => 'required',
-            'ubicacion' => 'required',
-            'capacidad' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'telefono' => 'required',
+            'licencia_medica' => 'required',
             'especialidad' => 'required',
-            'estado' => 'required',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|max:255|confirmed',
         ]);
+        $usuario = new User();
+        $usuario->name = $request->nombres;
+        $usuario->email = $request->email;
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
+        // acrualiza un nuevo doctor
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
     
-        // Actualizar los datos del doctor existente
-        $doctor->update($request->all()); // Actualizar el registro específico
+        // Crea el nuevo doctor
+        $doctor->update($data);
+    
     
         return redirect()->route('admin.doctores.index')
             ->with('info', 'Doctor actualizado correctamente.')

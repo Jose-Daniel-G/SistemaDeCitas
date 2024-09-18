@@ -400,6 +400,23 @@ return [
 
             ],
         ],
+        [
+            'text' => 'Horarios',
+            'icon' => 'fas fa-fw fa-lock',
+            'submenu' => [
+                [
+                    'text' => 'Creacion de horarios',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.horarios.create',
+                ],
+                [
+                    'text' => 'Listado de horarios',
+                    'icon'        => 'far fa-circle nav-icon',
+                    'route' => 'admin.horarios.index',
+                ],
+
+            ],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

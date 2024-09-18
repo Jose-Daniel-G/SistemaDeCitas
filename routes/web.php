@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConsultorioController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\UsuarioController;
@@ -34,6 +35,7 @@ Route::resource('/admin/consultorios', ConsultorioController::class)->names('adm
 Route::resource('/admin/doctores', DoctorController::class)->names('admin.doctores')->parameters([
     'doctores' => 'doctor'
 ])->middleware('auth');
+Route::resource('/admin/horarios', HorarioController::class)->names('admin.horarios')->middleware('auth');
 
 
 

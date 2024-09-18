@@ -39,23 +39,23 @@
                         </thead>
                         <tbody>
                             <?php $contador = 1; ?>
-                            @foreach ($consultorios as $cosultorio)
+                            @foreach ($consultorios as $consultorio)
                                 <tr>
                                     <td scope="row">{{ $contador++ }}</td>
-                                    <td scope="row">{{ $cosultorio->nombre }}</td>
-                                    <td scope="row">{{ $cosultorio->ubicacion }}</td>
-                                    <td scope="row">{{ $cosultorio->capcacidad }}</td>
-                                    <td scope="row">{{ $cosultorio->telefono }}</td>
-                                    <td scope="row">{{ $cosultorio->especialidad }}</td>
-                                    <td scope="row">{{ $cosultorio->estado }}</td>
+                                    <td scope="row">{{ $consultorio->nombre }}</td>
+                                    <td scope="row">{{ $consultorio->ubicacion }}</td>
+                                    <td scope="row">{{ $consultorio->capcacidad }}</td>
+                                    <td scope="row">{{ $consultorio->telefono }}</td>
+                                    <td scope="row">{{ $consultorio->especialidad }}</td>
+                                    <td scope="row">{{ $consultorio->estado }}</td>
                                     <td scope="row">
                                         <div class="btn-group" role="group" aria-label="basic example">
-                                            <a href="{{ route('admin.consultorios.show', $cosultorio->id) }}"
+                                            <a href="{{ route('admin.consultorios.show', $consultorio->id) }}"
                                                 class="btn btn-info btn-sm">Ver</a>
-                                            <a href="{{ route('admin.consultorios.edit', $cosultorio->id) }}"
+                                            <a href="{{ route('admin.consultorios.edit', $consultorio->id) }}"
                                                 class="btn btn-success btn-sm">Editar</a>
-                                            <form action="{{ route('admin.consultorios.destroy', $cosultorio->id) }}" method="POST"
-                                                onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cosultorio?');">
+                                            <form action="{{ route('admin.consultorios.destroy', $consultorio->id) }}" method="POST"
+                                                onsubmit="return confirm('¿Estás seguro de que deseas eliminar este consultorio?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>

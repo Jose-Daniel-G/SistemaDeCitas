@@ -20,38 +20,26 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('admin.doctores.update', $doctor->id) }}" method="POST"
-                            autocomplete="off">
+                        <form action="{{ route('admin.doctores.update', $doctor->id) }}" method="POST" autocomplete="off">
                             @csrf
                             @method('PUT')
-
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="nombre">Nombre del doctor </label><b>*</b>
-                                        <input type="text" class="form-control" name="nombre"
-                                            value="{{ $doctor->nombre }}" required>
-                                        @error('nombre')
+                                        <label for="nombres">Nombre del doctor </label><b>*</b>
+                                        <input type="text" class="form-control" name="nombres"
+                                            value="{{ $doctor->nombres }}" required>
+                                        @error('nombres')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="ubicacion">Ubicacion </label><b>*</b>
-                                        <input type="text" class="form-control" name="ubicacion"
-                                            value="{{ $doctor->ubicacion }}" required>
-                                        @error('ubicacion')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="capacidad">Capacidad </label><b>*</b>
-                                        <input type="text" class="form-control" name="capacidad"
-                                            value="{{ $doctor->capacidad }}" required>
-                                        @error('capacidad')
+                                        <label for="apellidos">Apellidos </label><b>*</b>
+                                        <input type="text" class="form-control" name="apellidos"
+                                            value="{{ $doctor->apellidos }}" required>
+                                        @error('apellidos')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -59,16 +47,26 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="telefono">Telefono </label><b>*</b>
-                                        <input type="text" class="form-control" name="telefono"
+                                        <input type="number" class="form-control" name="telefono"
                                             value="{{ $doctor->telefono }}" required>
                                         @error('telefono')
                                             <small class="bg-danger text-white p-1">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="licencia_medica">Licencia Medica </label><b>*</b>
+                                        <input type="text" class="form-control" name="licencia_medica"
+                                            value="{{ $doctor->licencia_medica }}" required>
+                                        @error('licencia_medica')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="especialidad">Especialidad </label><b>*</b>
                                         <input type="text" class="form-control" name="especialidad"
@@ -81,43 +79,49 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="estado">Estado </label><b>*</b>
-                                        <select name="estado" id="" class="form-control" name="estado">
-                                            <!-- Opción por defecto -->
-                                            @if ($doctor->estado == 'A')
-                                                <option value="A">Activo</option>
-                                                <option value="I">Inactivo</option>
-                                            @else
-                                                <option value="I">Inactivo</option>
-                                                <option value="A">Activo</option>
-                                            @endif
-
-                                        </select>
+                                        <label for="email">Email </label><b>*</b>
+                                        <input type="email" class="form-control" name="email"
+                                            value="{{ $doctor->user->email }}" required>
+                                        @error('email')
+                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
 
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <a href="{{ route('admin.doctores.index') }}" class="btn btn-secondary">
-                                            Regresar
-                                            {{-- <i class="fa-solid fa-plus"></i> --}}
-                                        </a>
-                                        <button type="submit" class="btn btn-primary">Registrar doctor</button>
+                                        <label for="password">Contrasena </label><b>*</b>
+                                        <input type="password" class="form-control" name="password" value="" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="password_confirmation">Verificacion de contrasena </label><b>*</b>
+                                            <input type="password" class="form-control" name="password_confirmation"
+                                                value="" >
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
 
+                        </div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <a href="{{ route('admin.secretarias.index') }}" class="btn btn-secondary">
+                                    Cancelar
+                                    {{-- <i class="fa-solid fa-plus"></i> --}}
+                                </a>
+                                <button type="submit" class="btn btn-primary">Actuliza doctor</button>
+                            </div>
+                        </div>
                     </div>
+                    </form>
                 </div>
+            </div>
 
             </div>
         </div>
-    @stop
+        @stop
 
     @section('css')
 

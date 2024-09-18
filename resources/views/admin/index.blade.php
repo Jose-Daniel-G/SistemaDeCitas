@@ -20,7 +20,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{$total_usuarios}}</h3>
+                                <h3>{{ $total_usuarios }}</h3>
 
                                 <p>Usuarios</p>
                             </div>
@@ -36,9 +36,9 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{$total_secretarias}}
-                                {{-- <sup style="font-size: 20px">%</sup></h3> --}}
-                                <p>Secretarias</p>
+                                <h3>{{ $total_secretarias }}
+                                    {{-- <sup style="font-size: 20px">%</sup></h3> --}}
+                                    <p>Secretarias</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -52,7 +52,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{$total_pacientes}}</h3>
+                                <h3>{{ $total_pacientes }}</h3>
 
                                 <p>Pacientes</p>
                             </div>
@@ -68,9 +68,9 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3>{{ $total_consultorios }}</h3>
 
-                                <p>Unique Visitors</p>
+                                <p>Consultorios</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
@@ -82,7 +82,23 @@
                     <!-- ./col -->
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{ $total_doctores }}</h3>
 
+                            <p>Doctores</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Mas informacion <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop

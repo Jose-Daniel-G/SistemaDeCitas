@@ -19,11 +19,14 @@ return new class extends Migration
             $table->string('licencia_medica');
             $table->string('especialidad');
             $table->unsignedBigInteger('user_id');
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
-
+    // $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+    // Define user_id y su clave foránea
     /**
      * Reverse the migrations.
      */

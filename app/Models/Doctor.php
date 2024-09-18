@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     use HasFactory;
+    // protected $table = 'doctors'; // Si la tabla se llama 'doctors'
 
-    protected $fillable=['nombres','apellidos','telefonos','licencia_medica','especialidad'];
+    protected $fillable=['nombres','apellidos','telefono','licencia_medica','especialidad',
+    'user_id',  // Asegúrate de agregarlo aquí
+    ];
     public function consultorio(){
         return $this->belongsTo(Consultorio::class);
     }
