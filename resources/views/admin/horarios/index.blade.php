@@ -4,7 +4,8 @@
 @section('css')
 @stop
 @section('content_header')
-    <h1>Listado de horarios</h1>
+    <h1>
+        Listado de horarios</h1>
 @stop
 
 @section('content')
@@ -78,23 +79,26 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Calendario de atencion de Doctores</h3>
-
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="card-title">Calendario de atencion de Doctores</h3>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-end">
+                                <label for="consultorio_id">Consultorios </label><b>*</b>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="consultorio_id" id="consultorio_select" class="form-control">
+                                <option value="" selected disabled>Seleccione una opción</option>
+                                @foreach ($consultorios as $consultorio)
+                                    <option value="{{ $consultorio->id }}">
+                                        {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="consultorio_id">Consultorios </label><b>*</b>
-                        <select name="consultorio_id" id="consultorio_select" class="form-control">
-                            <option value="" selected disabled>Seleccione una opción</option>
-                            @foreach ($consultorios as $consultorio)
-                                <option value="{{ $consultorio->id }}">
-                                    {{ $consultorio->nombres . ' - ' . $consultorio->ubicacion }} </option>
-                            @endforeach
-                        </select>
-                        @error('consultorio_id')
-                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                        @enderror
-                    </div>
+
                     <hr>
                     <div id="consultorio_info"></div>
                 </div>
@@ -104,7 +108,8 @@
 @stop
 
 @section('js')
-    <script>// carga contenido de tabla en  consultorio_info
+    <script>
+        // carga contenido de tabla en  consultorio_info
         $('#consultorio_select').on('change', function() {
             var consultorio_id = $('#consultorio_select').val();
             var url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
@@ -143,7 +148,7 @@
             responsive: true,
             autoWidth: false, //no le vi la funcionalidad
             dom: 'Bfrtip', // Añade el contenedor de botones
-           // buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'  ], // Botones que aparecen en la imagen
+            // buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'  ], // Botones que aparecen en la imagen
             "language": {
                 "decimal": "",
                 "emptyTable": "No hay datos disponibles en la tabla",

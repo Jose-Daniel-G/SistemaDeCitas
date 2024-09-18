@@ -11,162 +11,96 @@
         <div class="row">
             <h1>Registro de un nuevo horario</h1>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Llene los Datos</h3>
-                    </div>
-                    <div class="card-body">
+
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Llene los Datos</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
                         <form action="{{ route('admin.horarios.store') }}" method="POST" autocomplete="off">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="doctor_id">Doctores </label><b>*</b>
-                                        <select class="form-control" name="doctor_id" id="doctor_id">
-                                            <option value="" selected disabled>Seleccione una opción</option>
-                                            @foreach ($doctores as $doctor)
-                                                <option value="{{ $doctor->id }}">
-                                                    {{ $doctor->nombres . ' ' . $doctor->apellidos }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('doctor_id')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="consultorio_id">Consultorios </label><b>*</b>
-                                        <select class="form-control" name="consultorio_id" id="consultorio_id">
-                                            <option value="" selected disabled>Seleccione una opción</option>
-                                            @foreach ($consultorios as $consultorio)
-                                                <option value="{{ $consultorio->id }}">
-                                                    {{ $consultorio->nombres . ' Ubicacion: ' . $consultorio->ubicacion }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('consultorio_id')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="consultorio_id">Consultorios </label><b>*</b>
+                                <select name="consultorio_id" id="consultorio_select" class="form-control">
+                                    <option value="" selected disabled>Seleccione una opción</option>
+                                    @foreach ($consultorios as $consultorio)
+                                        <option value="{{ $consultorio->id }}">
+                                            {{ $consultorio->nombres . ' - ' . $consultorio->ubicacion }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('consultorio_id')
+                                    <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                @enderror
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="dia">Dia </label><b>*</b>
-                                        <select class="form-control" name="dia" id="dia">
-                                            <option value="" selected disabled>Seleccione una opción</option>
-                                            <option value="LUNES">LUNES</option>
-                                            <option value="MARTES">MARTES</option>
-                                            <option value="MIERCOLES">MIERCOLES</option>
-                                            <option value="JUEVES">JUEVES</option>
-                                            <option value="VIERNES">VIERNES</option>
-                                            <option value="SABADO">SABADO</option>
-                                            {{-- <option value="DOMINGO">DOMINGO</option> --}}
-                                        </select>
-                                        @error('dia')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="hora_inicio">Hora Inicio </label><b>*</b>
-                                        <input type="time" class="form-control" name="hora_inicio" id="hora_inicio"
-                                            value="{{ old('hora_inicio') }}" required>
-                                        @error('hora_inicio')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="doctor_id">Doctores </label><b>*</b>
+                                <select class="form-control" name="doctor_id" id="doctor_id">
+                                    <option value="" selected disabled>Seleccione una opción</option>
+                                    @foreach ($doctores as $doctor)
+                                        <option value="{{ $doctor->id }}">
+                                            {{ $doctor->nombres . ' ' . $doctor->apellidos }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('doctor_id')
+                                    <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                @enderror
                             </div>
-                            <div class="row">
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="hora_fin">Hora Final </label><b>*</b>
-                                        <input type="time" class="form-control" name="hora_fin" id="hora_fin"
-                                            value="{{ old('hora_fin') }}" required>
-                                        @error('hora_fin')
-                                            <small class="bg-danger text-white p-1">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="dia">Dia </label><b>*</b>
+                                <select class="form-control" name="dia" id="dia">
+                                    <option value="" selected disabled>Seleccione una opción</option>
+                                    <option value="LUNES">LUNES</option>
+                                    <option value="MARTES">MARTES</option>
+                                    <option value="MIERCOLES">MIERCOLES</option>
+                                    <option value="JUEVES">JUEVES</option>
+                                    <option value="VIERNES">VIERNES</option>
+                                    <option value="SABADO">SABADO</option>
+                                </select>
+                                @error('dia')
+                                    <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                @enderror
                             </div>
-                            <div class="row">
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <a href="{{ route('admin.horarios.index') }}"
-                                                class="btn btn-secondary">Regresar</a>
-                                            <button type="submit" class="btn btn-primary">Registrar horario</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="hora_inicio">Hora Inicio </label><b>*</b>
+                                <input type="time" class="form-control" name="hora_inicio" id="hora_inicio"
+                                    value="{{ old('hora_inicio') }}" required>
+                                @error('hora_inicio')
+                                    <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hora_fin">Hora Final </label><b>*</b>
+                                <input type="time" class="form-control" name="hora_fin" id="hora_fin"
+                                    value="{{ old('hora_fin') }}" required>
+                                @error('hora_fin')
+                                    <small class="bg-danger text-white p-1">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <a href="{{ route('admin.horarios.index') }}" class="btn btn-secondary">Regresar</a>
+                                <button type="submit" class="btn btn-primary">Registrar horario</button>
+                            </div>
                         </form>
-
-                    </div>
+                    </div>            <div class="col-md-9">
+                <hr>
+                <div id="consultorio_info"></div>
+            </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Lunes</th>
-                            <th scope="col">Martes</th>
-                            <th scope="col">Miercoles</th>
-                            <th scope="col">Jueves</th>
-                            <th scope="col">Viernes</th>
-                            <th scope="col">Sabado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $horas = ['08:00:00 - 09:00:00','09:00:00 - 10:00:00','10:00:00 - 11:00:00','11:00:00 - 12:00:00','12:00:00 - 13:00:00','13:00:00 - 14:00:00','15:00:00 - 16:00:00','17:00:00 - 18:00:00','19:00:00 - 20:00:00',];
-                            $diasSemana = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
-                        @endphp
 
-                        @foreach ($horas as $hora)
-                            @php
-                                [$hora_inicio, $hora_fin] = explode(' - ', $hora);
-                            @endphp
-                            <tr>
-                                <td scope="row">{{ $hora }}</td>
-                                @foreach ($diasSemana as $dia)
-                                    @php
-                                        $nombre_doctor = '';
-                                        foreach ($horarios as $horario) {
-                                            if (
-                                                strtoupper($horario->dia) == $dia &&
-                                                $hora_inicio >= $horario->hora_inicio &&
-                                                $hora_fin <= $horario->hora_fin
-                                            ) {
-                                                $nombre_doctor =
-                                                    $horario->doctor->nombres . ' ' . $horario->doctor->apellidos; // Acceder al atributo nombres
-                                                break;
-                                            }
-                                        }
-                                    @endphp
-                                    <td>{{ $nombre_doctor }}</td>
-                                @endforeach
-                            </tr>
-                        @endforeach
 
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
+
 
 
 @stop
@@ -176,6 +110,29 @@
 @stop
 
 @section('js')
+    <script>
+        // carga contenido de tabla en  consultorio_info
+        $('#consultorio_select').on('change', function() {
+            var consultorio_id = $('#consultorio_select').val();
+            var url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
+            url = url.replace(':id', consultorio_id);
+
+            if (consultorio_id) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#consultorio_info').html(data);
+                    },
+                    error: function() {
+                        alert('Error al obtener datos del consultorio');
+                    }
+                });
+            } else {
+                $('#consultorio_info').html('');
+            }
+        });
+    </script>
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap4.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
