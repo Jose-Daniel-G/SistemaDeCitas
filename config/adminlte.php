@@ -295,15 +295,15 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type' => 'navbar-search',
+        //     'text' => 'search',
+        //     'topnav_right' => true,
+        // ],
+        // [
+        //     'type' => 'fullscreen-widget',
+        //     'topnav_right' => true,
+        // ],
 
         // Sidebar items:
         [
@@ -313,6 +313,7 @@ return [
         [
             'text' => 'Usuarios',
             'icon'        => 'fas fa-users fa-fw',
+            'can' => 'usuarios',
             // 'url' => 'admin/usuarios',
             // 'can' => 'manage-blog',
             'submenu' => [
@@ -320,11 +321,13 @@ return [
                     'text' => 'Creacion de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
                     'route' => 'usuarios.create',
+                    'can' => 'usuarios.create',  // Verificar que se aplica correctamente
                 ],
                 [
                     'text' => 'Listado de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
                     'route' => 'usuarios.index',
+
                 ],
 
             ],
@@ -333,6 +336,7 @@ return [
             'text' => 'Secretarias',
             // 'url' => 'admin/pages',
             'icon' => 'fa-solid fa-layer-group',
+            'can' => 'admin.secretarias.index',
             // 'label' => 4,
             // 'label_color' => 'success',
             'submenu' => [
@@ -352,6 +356,7 @@ return [
         [
             'text' => 'Pacientes',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'admin.pacientes.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de pacientes',
@@ -369,6 +374,7 @@ return [
         [
             'text' => 'Consultorios',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => 'admin.consultorios.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de consultorios',
@@ -386,6 +392,7 @@ return [
         [
             'text' => 'Doctores',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => 'admin.doctores.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de doctores',
@@ -403,6 +410,7 @@ return [
         [
             'text' => 'Horarios',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => 'admin.horarios.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de horarios',
@@ -417,71 +425,71 @@ return [
 
             ],
         ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+        // [
+        //     'text' => 'multilevel',
+        //     'icon' => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url' => '#',
+        //                 ],
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url' => '#',
+        //                     'submenu' => [
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url' => '#',
+        //                         ],
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url' => '#',
+        //                         ],
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //         ],
+        //     ],
+        // ],
+        // ['header' => 'labels'],
+        // [
+        //     'text' => 'important',
+        //     'icon_color' => 'red',
+        //     'url' => '#',
+        // ],
+        // [
+        //     'text' => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url' => '#',
+        // ],
+        // [
+        //     'text' => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url' => '#',
+        // ],
     ],
 
     /*

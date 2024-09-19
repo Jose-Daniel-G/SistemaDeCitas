@@ -16,7 +16,7 @@ Auth::routes();
 //RUTAS ADMIN
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 //RUTAS USUARIOS ADMIN
-Route::resource('/admin/usuarios', UsuarioController::class)->middleware('auth');
+Route::resource('/admin/usuarios', UsuarioController::class)->names('usuarios')->middleware('auth','can:admin.usuarios');
 // Route::get('/admin/usuarios', [UsuarioController::class, 'create'])->name('usuarios.index')->middleware('auth');
 // Route::get('/admin/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create')->middleware('auth');
 // Route::post('/admin/usuarios/create', [UsuarioController::class, 'store'])->name('usuarios.store')->middleware('auth');
@@ -26,20 +26,20 @@ Route::resource('/admin/usuarios', UsuarioController::class)->middleware('auth')
 // Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy')->middleware('auth');
 
 //RUTAS SECRETARIAS ADMIN
-Route::resource('/admin/secretarias', SecretariaController::class)->names('admin.secretarias')->middleware('auth');
+Route::resource('/admin/secretarias', SecretariaController::class)->names('admin.secretarias')->middleware('auth','can:admin.secretarias');
 //RUTAS PACIENTES ADMIN
-Route::resource('/admin/pacientes', PacienteController::class)->names('admin.pacientes')->middleware('auth');
+Route::resource('/admin/pacientes', PacienteController::class)->names('admin.pacientes')->middleware('auth','can:admin.pacientes');
 //RUTAS CONSULTORIOS ADMIN
-Route::resource('/admin/consultorios', ConsultorioController::class)->names('admin.consultorios')->middleware('auth');
-// Route::resource('/admin/doctores', DoctorController::class)->names('admin.doctores')->middleware('auth');
+Route::resource('/admin/consultorios', ConsultorioController::class)->names('admin.consultorios')->middleware('auth','can:admin.consultorios');
+// Route::resource('/admin/doctores', DoctorController::class)->names('admin.doctores')->middleware('auth','can:admin.secretarias');
 Route::resource('/admin/doctores', DoctorController::class)->names('admin.doctores')->parameters([
     'doctores' => 'doctor'
-])->middleware('auth');
-Route::resource('/admin/horarios', HorarioController::class)->names('admin.horarios')->middleware('auth');
+])->middleware('auth','can:admin.doctores');
+Route::resource('/admin/horarios', HorarioController::class)->names('admin.horarios')->middleware('auth','can:admin.horarios');
 
 //AJAX
 Route::get('/admin/horarios/consultorio/{id}',[ HorarioController::class, 'cargar_datos_consultorios'])
-        ->name('admin.horarios.cargar_datos_consultorios')->middleware('auth');
+        ->name('admin.horarios.cargar_datos_consultorios')->middleware('auth','can:admin.cargar_datos_consultorios');
 
 
 

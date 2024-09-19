@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     use HasFactory;
-    // protected $table = 'doctors'; // Si la tabla se llama 'doctors'
+    protected $table = 'doctors'; // Si la tabla se llama 'doctors'
 
     protected $fillable=['nombres','apellidos','telefono','licencia_medica','especialidad',
     'user_id',  // Asegúrate de agregarlo aquí

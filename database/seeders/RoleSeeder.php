@@ -15,12 +15,12 @@ class RoleSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        //seeders para los roles y permisos admin, secretaria, doctores, pacientes, usuarios
         $admin = Role::create(['name' => 'admin']);
-        $secretaria = Role::create(['name' => 'secretarias']);
-        $doctor = Role::create(['name' => 'doctores']);
-        $paciente = Role::create(['name' => 'pacientes']);
-        $usuario = Role::create(['name' => 'usuarios']);    
+        $secretaria = Role::create(['name' => 'secretaria']);
+        $doctor = Role::create(['name' => 'doctor']);
+        $paciente = Role::create(['name' => 'pacientE']);
+        $usuario = Role::create(['name' => 'usuario']);    
 
         // Permission::create(['name'=>'admin.home'])->assignRole($role1);
         Permission::create(['name'=>'admin.index']);

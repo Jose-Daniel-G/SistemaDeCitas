@@ -35,26 +35,26 @@ class DatabaseSeeder extends Seeder
             'name' => 'Secretaria',
             'email' => 'secretaria@gmail.com',
             'password' => bcrypt('123123123'),
-        ])->assignRole('secretarias');
+        ])->assignRole('secretaria');
         User::create([
             'name' => 'Doctor',
             'email' => 'doctor@gmail.com',
             'password' => bcrypt('123123123'),
-        ])->assignRole('doctores');
+        ])->assignRole('doctor');
         User::create([
             'name' => 'Paciente',
             'email' => 'paciente@gmail.com',
             'password' => bcrypt('123123123'),
-        ])->assignRole('pacientes');
+        ])->assignRole('paciente');
         
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => bcrypt('123123123'),
-        ])->assignRole('usuarios');
+        ])->assignRole('usuario');
         
         Paciente::factory(10)->create()->each(function ($user){
-            $user->assignRole('pacientes');
+            $user->assignRole('paciente');
         });
 
 
