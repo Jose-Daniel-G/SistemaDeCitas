@@ -8,7 +8,7 @@ use App\Models\Horario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Carbon\Carbon;
 class HorarioController extends Controller
 {
     public function index()
@@ -47,24 +47,21 @@ class HorarioController extends Controller
             'hora_inicio' => 'required|date_format:H:i',
             'hora_fin' => 'required|date_format:H:i|after:hora_inicio',
         ]);
-
-        // Verificar si el horario ya existe para ese día y rango de horas
+        // Verificar si el horario ya existe para ese día, rango de horas y consultorio
         $horarioExistente = Horario::where('dia', $request->dia)
+            ->where('consultorio_id', $request->consultorio_id) // Filtrar por consultorio
             ->where(function ($query) use ($request) {
                 $query->where(function ($query) use ($request) {
-                    $query->where('hora_inicio', '>=', $request->hora_inicio)
-                        ->where('hora_fin', '<', $request->hora_fin);
-                })->orWhere(function ($query) use ($request) {
-                    $query->where(function ($query) use ($request) {
-                        $query->where('hora_fin', '>', $request->hora_inicio)
-                            ->where('hora_fin', '<=', $request->hora_fin);
-
-                    })->orWhere(function ($query) use ($request) {
-                        $query->where(function ($query) use ($request) {
-                            $query->where('hora_fin', '<', $request->hora_inicio)
-                                ->where('hora_fin', '>', $request->hora_fin);
-                        });
-                    });
+                    $query->where('hora_inicio', '>=', $request->hora_inicio) 
+                        ->where('hora_inicio', '<', $request->hora_fin);
+                })
+                ->orWhere(function ($query) use ($request) {
+                    $query->where('hora_fin', '>', $request->hora_inicio)
+                        ->where('hora_fin', '<=', $request->hora_fin);
+                })
+                ->orWhere(function ($query) use ($request) {
+                    $query->where('hora_inicio', '<', $request->hora_inicio)
+                        ->where('hora_fin', '>', $request->hora_fin);
                 });
             })
             ->exists();
@@ -95,8 +92,12 @@ class HorarioController extends Controller
 
     public function edit(Horario $horario)
     {
-        // $horario = $horario->with('doctor', 'consultorio')->get();
-        return view('admin.horarios.edit', compact('horario'));
+        // Obtener el consultorio relacionado con el horario
+        $consultorio = $horario->consultorio;
+        $doctores = Doctor::all();
+        $consultorios = Consultorio::all();
+
+        return view('admin.horarios.edit', compact('horario', 'consultorio', 'doctores', 'consultorios'));
     }
 
     public function update(Request $request, Horario $horario)

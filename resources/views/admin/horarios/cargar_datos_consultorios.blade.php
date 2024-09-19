@@ -30,6 +30,8 @@
             @foreach ($horas as $hora)
                 @php
                     [$hora_inicio, $hora_fin] = explode(' - ', $hora);
+                    $hora_inicio = date('H:i:s', strtotime($hora_inicio));
+                    $hora_fin = date('H:i:s', strtotime($hora_fin));
                 @endphp
                 <tr>
                     <td scope="row">{{ $hora }}</td>
@@ -37,16 +39,15 @@
                         @php
                             $nombre_doctor = '';
                             foreach ($horarios as $horario) {
+                                $horario_inicio = date('H:i:s', strtotime($horario->hora_inicio));
+                                $horario_fin = date('H:i:s', strtotime($horario->hora_fin));
+
                                 if (
                                     strtoupper($horario->dia) == $dia &&
-                                    $hora_inicio >= $horario->hora_inicio &&
-                                    $hora_fin <= $horario->hora_fin
+                                    $hora_inicio < $horario_fin && // Ajuste en comparación
+                                    $hora_fin > $horario_inicio // Ajuste en comparación
                                 ) {
-                                    $nombre_doctor =
-                                        $horario->doctor->nombres .
-                                        ' ' .
-                                        $horario->doctor->apellidos; // Acceder al atributo nombres
-                                    break;
+                                    $nombre_doctor = $horario->doctor->nombres . ' ' . $horario->doctor->apellidos;
                                 }
                             }
                         @endphp
@@ -54,6 +55,7 @@
                     @endforeach
                 </tr>
             @endforeach
+
 
         </tbody>
     </table>

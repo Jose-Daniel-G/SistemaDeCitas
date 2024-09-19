@@ -20,9 +20,9 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('admin.horarios.update') }}" method="POST" autocomplete="off">
+                        <form action="{{ route('admin.horarios.update', $horario->id)  }}" method="POST" autocomplete="off">
                             @csrf
-                            @method('PUT');
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
