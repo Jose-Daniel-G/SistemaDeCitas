@@ -75,7 +75,7 @@
                     <div class="icon">
                         <i class="ion fas bi bi-building-fill-add"></i>
                     </div>
-                    <a href="{{ route('admin.horarios.index') }}" class="small-box-footer">More info <i
+                    <a href="{{ route('admin.consultorios.index') }}" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     <div class="icon">
                         <i class="ion fas bi bi-person-lines-fill"></i>
                     </div>
-                    <a href="{{ route('admin.horarios.index') }}" class="small-box-footer">Mas informacion <i
+                    <a href="{{ route('admin.doctores.index') }}" class="small-box-footer">Mas informacion <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>

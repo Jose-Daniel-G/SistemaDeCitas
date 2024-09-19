@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -292,7 +292,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
+// NO ESTA FUCINANDO EL TAG CAN, POR EL MOMENTO SE DESCONOCE EL MOTIVO
     'menu' => [
         // Navbar items:
         // [
@@ -321,7 +321,6 @@ return [
                     'text' => 'Creacion de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
                     'route' => 'usuarios.create',
-                    'can' => 'usuarios.create',  // Verificar que se aplica correctamente
                 ],
                 [
                     'text' => 'Listado de usuarios',

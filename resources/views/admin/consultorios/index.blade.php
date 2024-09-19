@@ -44,7 +44,7 @@
                                     <td scope="row">{{ $contador++ }}</td>
                                     <td scope="row">{{ $consultorio->nombre }}</td>
                                     <td scope="row">{{ $consultorio->ubicacion }}</td>
-                                    <td scope="row">{{ $consultorio->capcacidad }}</td>
+                                    <td scope="row">{{ $consultorio->capacidad }}</td>
                                     <td scope="row">{{ $consultorio->telefono }}</td>
                                     <td scope="row">{{ $consultorio->especialidad }}</td>
                                     <td scope="row">{{ $consultorio->estado }}</td>
