@@ -44,6 +44,7 @@ class DoctorController extends Controller
     
         // Crea el nuevo doctor
         Doctor::create($data);
+        $usuario->assignRole('doctor');
     
 
         return redirect()->route('admin.doctores.index')

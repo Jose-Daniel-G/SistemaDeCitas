@@ -7,14 +7,17 @@ use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {return view('index');});  
-
+Route::get('/', [WebController::class, 'index'])->name('index');  
+Route::get('/consultorio/{id}',[ WebController::class, 'cargar_datos_consultorios'])
+        ->name('cargar_datos_consultorios');
 Auth::routes();
 
 //RUTAS ADMIN
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
+
 //RUTAS USUARIOS ADMIN
 Route::resource('/admin/usuarios', UsuarioController::class)->names('usuarios')->middleware('auth','can:admin.usuarios');
 // Route::get('/admin/usuarios', [UsuarioController::class, 'create'])->name('usuarios.index')->middleware('auth');

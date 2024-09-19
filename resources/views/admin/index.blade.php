@@ -112,9 +112,88 @@
                 </div>
             </div>
         @endcan
+    </div>
 
-    @stop
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="card-title">Calendario de atencion de Doctores</h3>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-end">
+                            <label for="consultorio_id">Consultorios </label><b>*</b>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="consultorio_id" id="consultorio_select" class="form-control">
+                                <option value="" selected disabled>Seleccione una opción</option>
+                                @foreach ($consultorios as $consultorio)
+                                    <option value="{{ $consultorio->id }}">
+                                        {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
 
-    @section('js')
+                    <hr>
+                    <div id="consultorio_info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-warning">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="card-title">Calendario de reserva de citas medicas</h3>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-end">
+                            <label for="consultorio_id">Consultorios </label><b>*</b>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="consultorio_id" id="consultorio_select" class="form-control">
+                                <option value="" selected disabled>Seleccione una opción</option>
+                                @foreach ($consultorios as $consultorio)
+                                    <option value="{{ $consultorio->id }}">
+                                        {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-    @stop
+            </div>
+        </div>
+    </div>
+@stop
+
+@section('js')
+    <script>
+        // carga contenido de tabla en  consultorio_info
+        $('#consultorio_select').on('change', function() {
+            var consultorio_id = $('#consultorio_select').val();
+            var url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
+            url = url.replace(':id', consultorio_id);
+
+            if (consultorio_id) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#consultorio_info').html(data);
+                    },
+                    error: function() {
+                        alert('Error al obtener datos del consultorio');
+                    }
+                });
+            } else {
+                $('#consultorio_info').html('');
+            }
+        });
+    </script>
+@stop
