@@ -29,15 +29,15 @@ class HorarioController extends Controller
     public function cargar_datos_consultorios($id)
     {
         try {
-            $horarios = Horario::with('doctor', 'consultorio')->where('consultorio_id',$id)->get(); 
+            $horarios = Horario::with('doctor', 'consultorio')->where('consultorio_id', $id)->get();
             // print_r($horarios);
-            
+
             return view('admin.horarios.cargar_datos_consultorios', compact('horarios'));
         } catch (\Exception $exception) {
-            return response()->json(['mesaje'=>'Error']);
+            return response()->json(['mesaje' => 'Error']);
         }
     }
- 
+
 
     public function store(Request $request)
     {
@@ -52,9 +52,19 @@ class HorarioController extends Controller
         $horarioExistente = Horario::where('dia', $request->dia)
             ->where(function ($query) use ($request) {
                 $query->where(function ($query) use ($request) {
-                    // Condición 1: La hora de inicio del horario nuevo no debe estar dentro de un horario existente
-                    $query->where('hora_inicio', '<', $request->hora_fin)
-                        ->where('hora_fin', '>', $request->hora_inicio);
+                    $query->where('hora_inicio', '>=', $request->hora_inicio)
+                        ->where('hora_fin', '<', $request->hora_fin);
+                })->orWhere(function ($query) use ($request) {
+                    $query->where(function ($query) use ($request) {
+                        $query->where('hora_fin', '>', $request->hora_inicio)
+                            ->where('hora_fin', '<=', $request->hora_fin);
+
+                    })->orWhere(function ($query) use ($request) {
+                        $query->where(function ($query) use ($request) {
+                            $query->where('hora_fin', '<', $request->hora_inicio)
+                                ->where('hora_fin', '>', $request->hora_fin);
+                        });
+                    });
                 });
             })
             ->exists();
@@ -85,6 +95,7 @@ class HorarioController extends Controller
 
     public function edit(Horario $horario)
     {
+        // $horario = $horario->with('doctor', 'consultorio')->get();
         return view('admin.horarios.edit', compact('horario'));
     }
 

@@ -313,9 +313,7 @@ return [
         [
             'text' => 'Usuarios',
             'icon'        => 'fas fa-users fa-fw',
-            'can' => 'usuarios',
-            // 'url' => 'admin/usuarios',
-            // 'can' => 'manage-blog',
+            // 'can' => 'usuarios',
             'submenu' => [
                 [
                     'text' => 'Creacion de usuarios',
@@ -333,11 +331,8 @@ return [
         ],
         [
             'text' => 'Secretarias',
-            // 'url' => 'admin/pages',
             'icon' => 'fa-solid fa-layer-group',
-            'can' => 'admin.secretarias.index',
-            // 'label' => 4,
-            // 'label_color' => 'success',
+            // 'can' => 'admin.secretarias.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de secretarias',
@@ -355,7 +350,7 @@ return [
         [
             'text' => 'Pacientes',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'admin.pacientes.index',
+            // 'can' => 'admin.pacientes.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de pacientes',
@@ -373,7 +368,7 @@ return [
         [
             'text' => 'Consultorios',
             'icon' => 'fas fa-fw fa-lock',
-            'can' => 'admin.consultorios.index',
+            // 'can' => 'admin.consultorios.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de consultorios',
@@ -391,7 +386,7 @@ return [
         [
             'text' => 'Doctores',
             'icon' => 'fas fa-fw fa-lock',
-            'can' => 'admin.doctores.index',
+            // 'can' => 'admin.doctores.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de doctores',
@@ -409,7 +404,7 @@ return [
         [
             'text' => 'Horarios',
             'icon' => 'fas fa-fw fa-lock',
-            'can' => 'admin.horarios.index',
+            // 'can' => 'admin.horarios.index',
             'submenu' => [
                 [
                     'text' => 'Creacion de horarios',

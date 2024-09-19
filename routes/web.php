@@ -39,7 +39,7 @@ Route::resource('/admin/horarios', HorarioController::class)->names('admin.horar
 
 //AJAX
 Route::get('/admin/horarios/consultorio/{id}',[ HorarioController::class, 'cargar_datos_consultorios'])
-        ->name('admin.horarios.cargar_datos_consultorios')->middleware('auth','can:admin.cargar_datos_consultorios');
+        ->name('admin.horarios.cargar_datos_consultorios')->middleware('auth');
 
 
 

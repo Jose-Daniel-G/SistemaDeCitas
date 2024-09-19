@@ -27,7 +27,7 @@
                                     <option value="" selected disabled>Seleccione una opción</option>
                                     @foreach ($consultorios as $consultorio)
                                         <option value="{{ $consultorio->id }}">
-                                            {{ $consultorio->nombres . ' - ' . $consultorio->ubicacion }}
+                                            {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }}
                                         </option>
                                     @endforeach
                                 </select>
