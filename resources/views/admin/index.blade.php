@@ -166,13 +166,32 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
             </div>
         </div>
     </div>
 @stop
 
 @section('js')
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                events: [{
+                    title: 'Consultorio Odontologia',
+                    start: '2024-09-01', // Corregir formato de fecha
+                    end: '2024-09-01' // Corregir formato de fecha y coma
+                }]
+            });
+            calendar.render();
+        });
+    </script>
+
     <script>
         // carga contenido de tabla en  consultorio_info
         $('#consultorio_select').on('change', function() {
