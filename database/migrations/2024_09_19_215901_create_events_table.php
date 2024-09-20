@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->string("title",255);
-            $table->text('descripcion');
-            $table->dateTime('star');
+            $table->dateTime('start');
             $table->dateTime('end');
-            $table->dateTime('color');
+            $table->string('color');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

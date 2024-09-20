@@ -318,12 +318,12 @@ return [
                 [
                     'text' => 'Creacion de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
-                    'route' => 'usuarios.create',
+                    'route' => 'admin.usuarios.create',
                 ],
                 [
                     'text' => 'Listado de usuarios',
                     'icon'        => 'far fa-circle nav-icon',
-                    'route' => 'usuarios.index',
+                    'route' => 'admin.usuarios.index',
 
                 ],
 

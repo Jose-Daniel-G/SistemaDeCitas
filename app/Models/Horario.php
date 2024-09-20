@@ -21,4 +21,8 @@ class Horario extends Model
     {
         return $this->belongsTo(Consultorio::class, 'consultorio_id');
     }
+        public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

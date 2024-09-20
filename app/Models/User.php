@@ -47,12 +47,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Secretaria::class);
     }
-    public function pacientes()
+    // public function pacientes()
+    // {
+    //     return $this->hasMany(Paciente::class);
+    // }
+    public function doctores()
     {
-        return $this->hasMany(Paciente::class);
+        return $this->hasOne(Doctor::class);
     }
     public function consultorios()
     {
         return $this->hasOne(Consultorio::class);
+    }
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
 }

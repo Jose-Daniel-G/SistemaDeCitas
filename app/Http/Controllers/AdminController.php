@@ -22,12 +22,13 @@ class AdminController extends Controller
         $total_horarios = Horario::count();
         
         $consultorios = Consultorio::all();
-        return view('admin.index', compact('total_usuarios', 'total_secretarias', 'total_pacientes', 'total_consultorios', 'total_doctores', 'total_horarios', 'consultorios'));
+        $doctores =Doctor::all();
+        return view('admin.index', compact('total_usuarios', 'total_secretarias', 'total_pacientes', 'total_consultorios', 'total_doctores', 'total_horarios', 'consultorios', 'doctores'));
     }
 
     public function create()
     {
-        return view('usuarios.create');
+        return view('admin.usuarios.create');
     }
 
     public function store(Request $request)

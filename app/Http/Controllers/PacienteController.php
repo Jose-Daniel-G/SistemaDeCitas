@@ -40,6 +40,7 @@ class PacienteController extends Controller
         $paciente = new Paciente();
         $paciente->fill($validatedData); // Asignación masiva
         $paciente->save();
+        // $usuario->assignRole('paciente');
 
         return redirect()->route('admin.pacientes.index')
             ->with('info', 'Se registro al paciente de forma correcta')

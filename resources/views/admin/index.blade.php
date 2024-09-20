@@ -167,52 +167,121 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#claseModal">
+                            Registrar Cita Medica
+                        </button>
+                        <!-- Modal -->
+                        <form action="{{ route('admin.eventos.store') }}" method="POST">
+                            @csrf
+                            <div class="modal fade" id="claseModal" tabindex="-1" aria-labelledby="claseModal"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="claseModal">Reserva de cita medica</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group"><label for="doctor_id">Doctor</label>
+                                                        <select name="doctor_id" id="doctor_id" class="form-control">
+                                                            <option value="" selected disabled>Selecione</option>
+                                                            @foreach ($doctores as $doctore)
+                                                                <option value="{{ $doctore->id }}">
+                                                                    {{ $doctore->nombres . ' ' . $doctore->apellidos . ' - ' . $doctore->especialidad }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group"><label for="doctor">Fecha de reserva</label>
+                                                        <input type="date" class="form-control" name="fecha_reserva">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group"><label for="doctor">Hora de reserva</label>
+                                                        <input type="time" class="form-control" name="hora_reserva">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Registrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        {{-- @include('admin.modal.modal') --}}
+
+                    </div>
                     <div id="calendar"></div>
                 </div>
             </div>
         </div>
-    </div>
-@stop
+    @stop
 
-@section('js')
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'es',
-                events: [{
-                    title: 'Consultorio Odontologia',
-                    start: '2024-09-01', // Corregir formato de fecha
-                    end: '2024-09-01' // Corregir formato de fecha y coma
-                }]
-            });
-            calendar.render();
-        });
-    </script>
-
-    <script>
-        // carga contenido de tabla en  consultorio_info
-        $('#consultorio_select').on('change', function() {
-            var consultorio_id = $('#consultorio_select').val();
-            var url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
-            url = url.replace(':id', consultorio_id);
-
-            if (consultorio_id) {
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function(data) {
-                        $('#consultorio_info').html(data);
-                    },
-                    error: function() {
-                        alert('Error al obtener datos del consultorio');
-                    }
+    @section('js')
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: 'es',
+                    events: [{
+                        title: 'Consultorio Odontologia',
+                        start: '2024-09-01', // Corregir formato de fecha
+                        end: '2024-09-01' // Corregir formato de fecha y coma
+                    }]
                 });
-            } else {
-                $('#consultorio_info').html('');
-            }
-        });
-    </script>
-@stop
+                calendar.render();
+            });
+        </script>
+
+        <script>
+            // carga contenido de tabla en  consultorio_info
+            $('#consultorio_select').on('change', function() {
+                var consultorio_id = $('#consultorio_select').val();
+                var url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
+                url = url.replace(':id', consultorio_id);
+
+                if (consultorio_id) {
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        success: function(data) {
+                            $('#consultorio_info').html(data);
+                        },
+                        error: function() {
+                            alert('Error al obtener datos del consultorio');
+                        }
+                    });
+                } else {
+                    $('#consultorio_info').html('');
+                }
+            });
+            @if (session('info') && session('icono'))
+                Swal.fire({
+                    title: "Good job!",
+                    text: "{{ session('info') }}",
+                    icon: "{{ session('icono') }}"
+                });
+            @endif
+        </script>
+
+    @stop
