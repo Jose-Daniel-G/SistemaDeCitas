@@ -128,10 +128,9 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <a href="{{ route('admin.pacientes.index') }}" class="btn btn-secondary">
-                            Cancelar
+                            Regresar
                             {{-- <i class="fa-solid fa-plus"></i> --}}
                         </a>
-                        <button type="submit" class="btn btn-primary">Registrar paciente</button>
                     </div>
                 </div>
             </div>

@@ -197,6 +197,10 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
+                                                        @error('doctor_id')
+                                                            <small
+                                                                class="bg-danger text-white p-1">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,10 +214,11 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group"><label for="doctor">Hora de reserva</label>
+                                                    <div class="form-group"><label for="hora_reserva">Hora de
+                                                            reserva</label>
                                                         <input type="time" class="form-control" name="hora_reserva"
                                                             id="hora_reserva">
-                                                        @error('celular')
+                                                        @error('hora_reserva')
                                                             <small
                                                                 class="bg-danger text-white p-1">{{ $message }}</small>
                                                         @enderror
@@ -243,8 +248,9 @@
     @section('js')
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
         <script>
-            // VALIDAR SI LA FECHA YA NO HA PASADO
             document.addEventListener('DOMContentLoaded', function() {
+                //-------------------------------------------------------------
+                // VALIDAR SI LA FECHA YA NO HA PASADO
                 const fechaReservaInput = document.getElementById('fecha_reserva');
                 // Escuchar el evento de cambio en el campo de fecha de reserva
                 fechaReservaInput.addEventListener('change', function() {
@@ -259,9 +265,8 @@
                     }
 
                 })
-            });
-            // VALIDAR SI LA HORA YA NO HA PASADO
-            document.addEventListener('DOMContentLoaded', function() {
+                //----------------------------------------------------------------
+                // VALIDAR SI LA HORA YA NO HA PASADO
                 const HoraReservaInput = document.getElementById('hora_reserva');
 
                 // Escuchar el evento de cambio en el campo de hora de reserva
@@ -281,9 +286,7 @@
                     }
 
                 })
-            });
 
-            document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
@@ -320,13 +323,30 @@
                     $('#consultorio_info').html('');
                 }
             });
-            @if (session('info') && session('icono'))
+        </script>
+
+
+        @if (session('info') && session('icono') && session('hora_reserva'))
+            <script>
+                // document.addEventListener('DOMContentLoaded', function() {
+                //     $('#claseModal').show();
+                // });
                 Swal.fire({
-                    title: "Good job!",
+                    title: "{{ session('title') }}",
                     text: "{{ session('info') }}",
                     icon: "{{ session('icono') }}"
                 });
-            @endif
-        </script>
+            </script>
+        @endif
+
+        @if (session('info') && session('icono') && session('title'))
+            <script>
+                Swal.fire({
+                    title: "{{ session('title') }}",
+                    text: "{{ session('info') }}",
+                    icon: "{{ session('icono') }}"
+                });
+            </script>
+        @endif
 
     @stop

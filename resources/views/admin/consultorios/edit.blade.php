@@ -106,7 +106,7 @@
                                             Regresar
                                             {{-- <i class="fa-solid fa-plus"></i> --}}
                                         </a>
-                                        <button type="submit" class="btn btn-primary">Registrar consultorio</button>
+                                        <button type="submit" class="btn btn-primary">Actualizar consultorio</button>
                                     </div>
                                 </div>
                             </div>
