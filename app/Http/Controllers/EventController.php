@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Models\Event;
+use App\Models\Horario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class EventController extends Controller
 {
@@ -32,9 +34,24 @@ class EventController extends Controller
     {
         // $datos = $request->all();
         // return response()->json($datos);
+        $request->validate(['fecha_reserva'=>'required','hora_reserva'=>'required']);
+
         // Buscar el doctor por su ID
         $doctor = Doctor::find($request->doctor_id);
-    
+        $fecha_reserva = $request->fecha_reserva;
+        $hora_reserva = $request->hora_reserva;
+
+        $horarios = Horario::where('doctor_id', $doctor->id)
+                    ->where('dia', date('1',strtotime($fecha_reserva)))
+                    ->where('hora_inicio','<=','hora_reserva')
+                    ->where('hora_fin','>=','hora_reserva')
+                    ->exists();
+
+        if(!$horarios){
+            throw ValidationException::withMessages([
+                'hora_reserva'=>['El doctor no esta disponible en ese horario.'],
+            ]);
+        }            
         // Crear una nueva instancia de Event
         $evento = new Event();
         

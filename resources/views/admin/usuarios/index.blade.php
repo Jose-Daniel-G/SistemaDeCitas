@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Usuarios registrados</h3>
                     <div class="card-tools">
-                        <a href="{{ route('usuarios.create') }}" class="btn btn-primary">Registrar
+                        <a href="{{ route('admin.usuarios.create') }}" class="btn btn-primary">Registrar
                             {{-- <i class="fa-solid fa-plus"></i> --}}
                         </a>
                     </div>
