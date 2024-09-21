@@ -38,3 +38,30 @@
 7
 --
 577 
+$query = $horarios->toSql();
+$bindings = $horarios->getBindings();
+
+foreach ($bindings as $replace) {
+    $value = is_numeric($replace) ? $replace : "'$replace'";
+    $query = preg_replace('/\?/', $value, $query, 1);
+}
+dd($horarios->toSql());
+// Imprimir la consulta con los valores enlazados
+dd($horarios->toSql(), $horarios->getBindings());
+dd($horarios);
+
+select * from horarios where doctor_id = 1 and dia = 'LUNES' and hora_inicio <= '15:00:00' and hora_fin >= '15:00:00'
+SELECT *
+FROM horarios
+WHERE doctor_id = 1
+  AND dia = 'LUNES'
+  AND hora_inicio <= '15:00:00'
+  AND hora_fin >= '15:00:00'
+LIMIT 1
+
+array:4 [▼ // app\Http\Controllers\EventController.php:49
+  0 => 1
+  1 => "LUNES"
+  2 => "15:00:00"
+  3 => "15:00:00"
+]

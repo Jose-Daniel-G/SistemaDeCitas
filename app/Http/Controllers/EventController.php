@@ -43,12 +43,10 @@ class EventController extends Controller
         $horarios = Horario::where('doctor_id', $doctor->id)
             ->where('dia', $dia_de_reserva)
             ->where('hora_inicio', '<=', $hora_reserva)
-            ->where('hora_fin', '>=', $hora_reserva);
-            //->exists();
-
-        // dd($horarios->isEmpty());
-
-        if (!$horarios) {
+            ->where('hora_fin', '<=', $hora_reserva)
+            ->exists();
+        // dd($horarios);
+        if ($horarios) {
             return redirect()->back()->with([
                 'info' => 'El doctor no está disponible en ese horario.',
                 'icono' => 'error',

@@ -112,136 +112,137 @@
             </div>
         @endcan
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-outline card-primary">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 class="card-title">Calendario de reserva de citas medicas</h3>
-                        </div>
-                        <div class="col-md-4 d-flex justify-content-end">
-                            <label for="consultorio_id">Consultorios </label><b>*</b>
-                        </div>
-                        <div class="col-md-4">
-                            <select name="consultorio_id" id="consultorio_select" class="form-control">
-                                <option value="" selected disabled>Seleccione una opción</option>
-                                @foreach ($consultorios as $consultorio)
-                                    <option value="{{ $consultorio->id }}">
-                                        {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }} </option>
-                                @endforeach
-                            </select>
+    {{-- @can('cargar_datos_cosultorios') --}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 class="card-title">Calendario de reserva de citas medicas</h3>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <label for="consultorio_id">Consultorios </label><b>*</b>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="consultorio_id" id="consultorio_select" class="form-control">
+                                    <option value="" selected disabled>Seleccione una opción</option>
+                                    @foreach ($consultorios as $consultorio)
+                                        <option value="{{ $consultorio->id }}">
+                                            {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <hr>
-                    <div id="consultorio_info"></div>
+                    <div class="card-body">
+                        <hr>
+                        <div id="consultorio_info"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-outline card-warning">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 class="card-title">Calendario de reserva de citas medicas </h3>
-                        </div>
-                        <div class="col-md-4 d-flex justify-content-end">
-                            <label for="consultorio_id">Doctores </label><b>*</b>
-                        </div>
-                        <div class="col-md-4">
-                            <select name="doctor_id" id="doctor_select" class="form-control">
-                                <option value="" selected disabled>Seleccione una opción</option>
-                                @foreach ($doctores as $doctore)
-                                    <option value="{{ $doctore->id }}">
-                                        {{ $doctore->nombres . ' ' . $doctore->apellidos . ' ' . $doctore->especialidad }}
-                                    </option>
-                                @endforeach
-                            </select>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-warning">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 class="card-title">Calendario de reserva de citas medicas </h3>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <label for="consultorio_id">Doctores </label><b>*</b>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="doctor_id" id="doctor_select" class="form-control">
+                                    <option value="" selected disabled>Seleccione una opción</option>
+                                    @foreach ($doctores as $doctore)
+                                        <option value="{{ $doctore->id }}">
+                                            {{ $doctore->nombres . ' ' . $doctore->apellidos . ' ' . $doctore->especialidad }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#claseModal">
-                            Registrar Cita Medica
-                        </button>
-                        <!-- Modal -->
-                        <form action="{{ route('admin.eventos.store') }}" method="POST">
-                            @csrf
-                            <div class="modal fade" id="claseModal" tabindex="-1" aria-labelledby="claseModal"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="claseModal">Doctores</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group"><label for="doctor_id">Doctor</label>
-                                                        <select name="doctor_id" class="form-control">
-                                                            <option value="" selected disabled>Selecione un Doctor</option>
-                                                            @foreach ($doctores as $doctore)
-                                                                <option value="{{ $doctore->id }}">
-                                                                    {{ $doctore->nombres . ' ' . $doctore->apellidos . ' - ' . $doctore->especialidad }}
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#claseModal">
+                                Registrar Cita Medica
+                            </button>
+                            <!-- Modal -->
+                            <form action="{{ route('admin.eventos.store') }}" method="POST">
+                                @csrf
+                                <div class="modal fade" id="claseModal" tabindex="-1" aria-labelledby="claseModal"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="claseModal">Doctores</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group"><label for="doctor_id">Doctor</label>
+                                                            <select name="doctor_id" class="form-control">
+                                                                <option value="" selected disabled>Selecione un Doctor
                                                                 </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('doctor_id')
-                                                            <small
-                                                                class="bg-danger text-white p-1">{{ $message }}</small>
-                                                        @enderror
+                                                                @foreach ($doctores as $doctore)
+                                                                    <option value="{{ $doctore->id }}">
+                                                                        {{ $doctore->nombres . ' ' . $doctore->apellidos . ' - ' . $doctore->especialidad }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('doctor_id')
+                                                                <small
+                                                                    class="bg-danger text-white p-1">{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group"><label for="doctor">Fecha de reserva</label>
-                                                        <input type="date" class="form-control" name="fecha_reserva"
-                                                            id="fecha_reserva" value="<?php echo date('Y-m-d'); ?>">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group"><label for="doctor">Fecha de reserva</label>
+                                                            <input type="date" class="form-control" name="fecha_reserva"
+                                                                id="fecha_reserva" value="<?php echo date('Y-m-d'); ?>">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group"><label for="hora_reserva">Hora de
-                                                            reserva</label>
-                                                        <input type="time" class="form-control" name="hora_reserva"
-                                                            id="hora_reserva">
-                                                        @error('hora_reserva')
-                                                            <small
-                                                                class="bg-danger text-white p-1">{{ $message }}</small>
-                                                        @enderror
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group"><label for="hora_reserva">Hora de
+                                                                reserva</label>
+                                                            <input type="time" class="form-control" name="hora_reserva"
+                                                                id="hora_reserva">
+                                                            @error('hora_reserva')
+                                                                <small
+                                                                    class="bg-danger text-white p-1">{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary">Registrar</button>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <div id="calendar"></div>
                     </div>
-                    
-                    <div id="doctor_info"></div>
-                    <div id="calendar"></div>
                 </div>
             </div>
-        </div>
+        {{-- @endcan --}}
+
     @stop
 
     @section('js')
@@ -283,10 +284,7 @@
                         this.value = null;
                         alert('Por favor seleccione una fecha entre 08:00 y las 20:00');
                     }
-
                 })
-
-               
             });
         </script>
 
@@ -318,7 +316,11 @@
                 // alert(doctor_id)
                 var calendarEl = document.getElementById('calendar');
 
-                var calendar = new FullCalendar.Calendar(calendarEl, {initialView: 'dayGridMonth',locale: 'es',events: []});
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: 'es',
+                    events: []
+                });
 
                 var url = "{{ route('admin.horarios.cargar_reserva_doctores', ':id') }}";
                 url = url.replace(':id', doctor_id);
@@ -327,9 +329,9 @@
                     $.ajax({
                         url: url,
                         type: 'GET',
-                        dataType:'json',
+                        dataType: 'json',
                         success: function(data) {
-                           calendar.addEventSource(data);
+                            calendar.addEventSource(data);
                         },
                         error: function() {
                             alert('Error al obtener datos del doctor');

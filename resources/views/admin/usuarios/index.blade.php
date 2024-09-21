@@ -120,13 +120,7 @@
             }
 
         });
-        @if (session('info') && session('icono')&& session('hora_reserva'))
-            Swal.fire({
-                title: "EXISTENTE!",
-                text: "{{ session('info') }}",
-                icon: "{{ session('icono') }}"
-            });
-        @endif
+
         @if (session('info') && session('icono'))
             Swal.fire({
                 title: "Good job!",
