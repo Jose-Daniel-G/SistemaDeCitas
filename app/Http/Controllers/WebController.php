@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultorio;
+use App\Models\Event;
 use App\Models\Horario;
 use App\Models\Web;
 use Illuminate\Http\Request;
@@ -27,9 +28,14 @@ class WebController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function cargar_reserva_doctores($id)
     {
-        //
+        try {
+            $eventos = Event::where('doctor_id', $id)->get();
+            return response()->json($eventos);
+        } catch (\Exception $exception) {
+            return response()->json(['mesaje' => 'Error']);
+        }
     }
 
     public function show(Web $web)

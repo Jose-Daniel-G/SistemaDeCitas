@@ -119,7 +119,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 class="card-title">Calendario de atencion de Doctores</h3>
+                            <h3 class="card-title">Calendario de reserva de citas medicas</h3>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end">
                             <label for="consultorio_id">Consultorios </label><b>*</b>
@@ -136,7 +136,6 @@
                     </div>
                 </div>
                 <div class="card-body">
-
                     <hr>
                     <div id="consultorio_info"></div>
                 </div>
@@ -149,17 +148,18 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4">
-                            <h3 class="card-title">Calendario de reserva de citas medicas</h3>
+                            <h3 class="card-title">Calendario de reserva de citas medicas </h3>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end">
-                            <label for="consultorio_id">Consultorios </label><b>*</b>
+                            <label for="consultorio_id">Doctores </label><b>*</b>
                         </div>
                         <div class="col-md-4">
-                            <select name="consultorio_id" id="consultorio_select" class="form-control">
+                            <select name="doctor_id" id="doctor_select" class="form-control">
                                 <option value="" selected disabled>Seleccione una opción</option>
-                                @foreach ($consultorios as $consultorio)
-                                    <option value="{{ $consultorio->id }}">
-                                        {{ $consultorio->nombre . ' - ' . $consultorio->ubicacion }} </option>
+                                @foreach ($doctores as $doctore)
+                                    <option value="{{ $doctore->id }}">
+                                        {{ $doctore->nombres . ' ' . $doctore->apellidos . ' ' . $doctore->especialidad }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -179,7 +179,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="claseModal">Reserva de cita medica</h5>
+                                            <h5 class="modal-title" id="claseModal">Doctores</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                 aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -189,8 +189,8 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group"><label for="doctor_id">Doctor</label>
-                                                        <select name="doctor_id" id="doctor_id" class="form-control">
-                                                            <option value="" selected disabled>Selecione</option>
+                                                        <select name="doctor_id" class="form-control">
+                                                            <option value="" selected disabled>Selecione un Doctor</option>
                                                             @foreach ($doctores as $doctore)
                                                                 <option value="{{ $doctore->id }}">
                                                                     {{ $doctore->nombres . ' ' . $doctore->apellidos . ' - ' . $doctore->especialidad }}
@@ -235,10 +235,9 @@
                                 </div>
                             </div>
                         </form>
-
-                        {{-- @include('admin.modal.modal') --}}
-
                     </div>
+                    
+                    <div id="doctor_info"></div>
                     <div id="calendar"></div>
                 </div>
             </div>
@@ -287,17 +286,7 @@
 
                 })
 
-                var calendarEl = document.getElementById('calendar');
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    locale: 'es',
-                    events: [{
-                        title: 'Consultorio Odontologia',
-                        start: '2024-09-01', // Corregir formato de fecha
-                        end: '2024-09-01' // Corregir formato de fecha y coma
-                    }]
-                });
-                calendar.render();
+               
             });
         </script>
 
@@ -322,6 +311,35 @@
                 } else {
                     $('#consultorio_info').html('');
                 }
+            });
+            // carga contenido de tabla en  doctor_info
+            $('#doctor_select').on('change', function() {
+                var doctor_id = $('#doctor_select').val();
+                // alert(doctor_id)
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {initialView: 'dayGridMonth',locale: 'es',events: []});
+
+                var url = "{{ route('admin.horarios.cargar_reserva_doctores', ':id') }}";
+                url = url.replace(':id', doctor_id);
+
+                if (doctor_id) {
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataType:'json',
+                        success: function(data) {
+                           calendar.addEventSource(data);
+                        },
+                        error: function() {
+                            alert('Error al obtener datos del doctor');
+                        }
+                    });
+                } else {
+                    $('#doctor_info').html('');
+                }
+                calendar.render();
+
             });
         </script>
 

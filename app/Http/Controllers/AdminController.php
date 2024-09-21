@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Consultorio;
 use App\Models\Doctor;
+use App\Models\Event as CalendarEvent;  // Usa un alias para el modelo Event
 use App\Models\Horario;
 use App\Models\Paciente;
 use App\Models\Secretaria;
@@ -23,7 +24,8 @@ class AdminController extends Controller
         
         $consultorios = Consultorio::all();
         $doctores =Doctor::all();
-        return view('admin.index', compact('total_usuarios', 'total_secretarias', 'total_pacientes', 'total_consultorios', 'total_doctores', 'total_horarios', 'consultorios', 'doctores'));
+        $eventos = CalendarEvent::all();
+        return view('admin.index', compact('total_usuarios', 'total_secretarias', 'total_pacientes', 'total_consultorios', 'total_doctores', 'total_horarios', 'consultorios', 'doctores', 'eventos'));
     }
 
     public function create()

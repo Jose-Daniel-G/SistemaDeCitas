@@ -43,8 +43,8 @@ class EventController extends Controller
         $horarios = Horario::where('doctor_id', $doctor->id)
             ->where('dia', $dia_de_reserva)
             ->where('hora_inicio', '<=', $hora_reserva)
-            ->where('hora_fin', '>=', $hora_reserva)
-            ->exists();
+            ->where('hora_fin', '>=', $hora_reserva);
+            //->exists();
 
         // dd($horarios->isEmpty());
 
@@ -74,7 +74,7 @@ class EventController extends Controller
 
         // Crear una nueva instancia de Event
         $evento = new Event();
-        $evento->title = $request->hora_reserva . " - " . $doctor->especialidad;
+        $evento->title = $request->hora_reserva . " " . $doctor->especialidad;
         $evento->start = $request->fecha_reserva . " " . $hora_reserva;
         $evento->end = $request->fecha_reserva . " " . $hora_reserva;
         $evento->color = '#e82216';
