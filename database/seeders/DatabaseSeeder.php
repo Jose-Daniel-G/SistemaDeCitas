@@ -146,6 +146,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('123123123'),
         ])->assignRole('usuario');
+        User::factory()->create([
+            'name' => 'user',
+            'email' => 'user@example.com',
+            'password' => bcrypt('123123123'),
+        ])->assignRole('usuario');
 
         
         Paciente::factory(10)->create()->each(function ($user){

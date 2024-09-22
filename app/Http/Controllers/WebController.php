@@ -32,9 +32,9 @@ class WebController extends Controller
     public function cargar_reserva_doctores($id)
     {
         try {
-            $eventos = Event::where('doctor_id', $id)
-                    ->select('id','title', DB::raw('DATE_FORMAT(start, %Y-%m-%d) as start'),DB::raw('DATE_FORMAT(end, %Y-%m-%d) as end'),'color')
-                    ->get();
+            $eventos = Event::where('doctor_id', $id)->get();//NO ENTIENDO PORQUE NO FUNCIONA LA LINEA DE SQL SIGUIENTE DE CAMBIO DE COLOR Y OTROS
+                    // ->select('id','title', DB::raw('DATE_FORMAT(start, %Y-%m-%d) as start'),DB::raw('DATE_FORMAT(end, %Y-%m-%d) as end'),'color')
+                    // ->get();
             return response()->json($eventos);
         } catch (\Exception $exception) {
             return response()->json(['mesaje' => 'Error']);

@@ -51,10 +51,11 @@ class User extends Authenticatable
     // {
     //     return $this->hasMany(Paciente::class);
     // }
-    public function doctores()
+    public function doctor()
     {
         return $this->hasOne(Doctor::class);
     }
+    
     public function consultorios()
     {
         return $this->hasOne(Consultorio::class);

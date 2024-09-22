@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('especialidad');
             $table->string('estado');
+
+            // $table->unsignedBigInteger('doctor_id');
+            // $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }
